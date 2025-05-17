@@ -1,42 +1,42 @@
 import { createTheme } from "@shopify/restyle";
 
 const palette = {
-  purpleLight: "#8C6FF7",
-  purplePrimary: "#5A31F4",
-  purpleDark: "#3F22AB",
-
-  greenLight: "#56DCBA",
-  greenPrimary: "#0ECD9D",
-  greenDark: "#0A906E",
-
-  black: "#0B0B0B",
-  white: "#F0F2F3",
+  fieryRed: "#FF4B4B",
+  midnightBlack: "#1B1B1B",
+  charcoalGrey: "#302E2D",
+  stoneGrey: "#5C5C5C",
+  pureWhite: "#FFFFFF",
 };
-
 const theme = createTheme({
   colors: {
-    mainBackground: palette.black,
-    cardPrimaryBackground: palette.purplePrimary,
-    text: palette.white,
+    background: palette.midnightBlack,
+    primary: palette.fieryRed,
+    text: palette.pureWhite,
+    gray1: palette.charcoalGrey,
+    gray2: palette.stoneGrey,
   },
   spacing: {
-    s: 8,
-    m: 16,
-    l: 24,
-    xl: 40,
+    s2: 2,
+    s4: 4,
+    s8: 8,
+    s10: 10,
+    s12: 12,
+    s14: 14,
+    s16: 16,
+    s20: 20,
+    s24: 24,
+    s32: 32,
+    s40: 40,
+    s48: 48,
+    s56: 56,
   },
   textVariants: {
-    header: {
-      fontWeight: "bold",
-      fontSize: 34,
-    },
-    body: {
-      fontSize: 16,
-      lineHeight: 24,
-    },
     defaults: {
-      // We can define a default text variant here.
+      color: "text",
     },
+  },
+  borderRadii: {
+    default: 16,
   },
 });
 
