@@ -33,6 +33,31 @@ const theme = createTheme({
   textVariants: {
     defaults: {
       color: "text",
+      fontFamily: "PoppinsRegular",
+    },
+    title28: {
+      fontSize: 28,
+      fontFamily: "PoppinsSemibold",
+    },
+    title22: {
+      fontSize: 22,
+      fontFamily: "PoppinsSemibold",
+    },
+    title16: {
+      fontSize: 16,
+      fontFamily: "PoppinsSemibold",
+    },
+    text18: {
+      fontSize: 18,
+    },
+    text16: {
+      fontSize: 16,
+    },
+    text14: {
+      fontSize: 14,
+    },
+    text12: {
+      fontSize: 12,
     },
   },
   borderRadii: {
