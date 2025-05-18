@@ -29,35 +29,45 @@ const theme = createTheme({
     s40: 40,
     s48: 48,
     s56: 56,
+    padding: 16,
   },
   textVariants: {
     defaults: {
       color: "text",
       fontFamily: "PoppinsRegular",
+      fontSize: 16,
+      lineHeight: 18,
     },
     title28: {
       fontSize: 28,
-      fontFamily: "PoppinsSemibold",
+      fontFamily: "PoppinsSemiBold",
+      lineHeight: 30,
     },
     title22: {
       fontSize: 22,
-      fontFamily: "PoppinsSemibold",
+      fontFamily: "PoppinsSemiBold",
+      lineHeight: 24,
     },
     title16: {
       fontSize: 16,
-      fontFamily: "PoppinsSemibold",
+      fontFamily: "PoppinsSemiBold",
+      lineHeight: 18,
     },
     text18: {
       fontSize: 18,
+      lineHeight: 20,
     },
     text16: {
       fontSize: 16,
+      lineHeight: 18,
     },
     text14: {
       fontSize: 14,
+      lineHeight: 16,
     },
     text12: {
       fontSize: 12,
+      lineHeight: 14,
     },
   },
   borderRadii: {

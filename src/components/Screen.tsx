@@ -6,7 +6,7 @@ export function Screen({
   ...boxProps
 }: PropsWithChildren & BoxProps) {
   return (
-    <Box backgroundColor="background" paddingHorizontal="s16" {...boxProps}>
+    <Box backgroundColor="background" paddingHorizontal="padding" {...boxProps}>
       {children}
     </Box>
   );
