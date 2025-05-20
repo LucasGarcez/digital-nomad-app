@@ -47,6 +47,7 @@ const boxStyle: BoxProps = {
   padding: "s8",
   justifyContent: "space-between",
   backgroundColor: "gray1",
+  paddingLeft: "s16",
   height: 70,
   borderRadius: "rounded",
   borderWidth: 2,
