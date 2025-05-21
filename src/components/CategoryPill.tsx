@@ -4,7 +4,7 @@ import { Pill, PillProps } from "./Pill";
 
 type CategoryPillProps = {
   category: Category;
-} & Pick<PillProps, "active">;
+} & Pick<PillProps, "active" | "onPress">;
 export function CategoryPill({ category, ...pillProps }: CategoryPillProps) {
   return (
     <Pill
