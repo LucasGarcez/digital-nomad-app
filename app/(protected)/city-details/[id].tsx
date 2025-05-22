@@ -1,15 +1,43 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { Text, View } from "react-native";
+import { Screen } from "@/src/components/Screen";
+import { Text } from "@/src/components/Text";
+import { useCityDetails } from "@/src/data/useCityDetais";
+import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import { CityDetailsHeader } from "./components/CityDetailsHeader";
+import { CityDetailsInfo } from "./components/CityDetailsInfo";
+import { CityDetailsMap } from "./components/CityDetailsMap";
+import { CityDetailsRelatedCities } from "./components/CityDetailsRelatedCities";
+import { CityDetailsTouristAttractions } from "./components/CityDetailsTouristAttractions";
 
 export default function CityDetails() {
-  const router = useRouter();
-  const { id, name } = useLocalSearchParams();
+  const { id } = useLocalSearchParams();
+  const city = useCityDetails(id as string);
+
+  if (!city) {
+    return (
+      <Screen>
+        <Text>City not found</Text>
+      </Screen>
+    );
+  }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text onPress={router.back}>
-        City Details: {id} {name}
-      </Text>
-    </View>
+    <Screen>
+      <CityDetailsHeader
+        id={city.id}
+        coverImage={city.coverImage}
+        categories={city.categories}
+      />
+      <CityDetailsInfo
+        country={city.country}
+        name={city.name}
+        description={city.description}
+      />
+      <CityDetailsTouristAttractions
+        touristAttractions={city.touristAttractions}
+      />
+      <CityDetailsMap location={city.location} />
+      <CityDetailsRelatedCities relatedCitiesIds={city.relatedCitiesIds} />
+    </Screen>
   );
 }
