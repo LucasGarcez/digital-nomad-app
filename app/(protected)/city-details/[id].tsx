@@ -4,6 +4,7 @@ import { Text } from "@/src/components/Text";
 import { useCityDetails } from "@/src/data/useCityDetais";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
+
 import { CityDetailsHeader } from "./components/CityDetailsHeader";
 import { CityDetailsInfo } from "./components/CityDetailsInfo";
 import { CityDetailsMap } from "./components/CityDetailsMap";
@@ -23,7 +24,7 @@ export default function CityDetails() {
   }
 
   return (
-    <Screen style={{ paddingHorizontal: 0 }}>
+    <Screen scrollable style={{ paddingHorizontal: 0 }}>
       <CityDetailsHeader
         id={city.id}
         coverImage={city.coverImage}
