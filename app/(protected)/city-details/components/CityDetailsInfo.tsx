@@ -8,8 +8,14 @@ export function CityDetailsInfo({
   description,
 }: Pick<City, "country" | "name" | "description">) {
   return (
-    <Box paddingVertical="s24">
-      <Text>CityDetailsInfo</Text>
+    <Box marginTop="s16" paddingHorizontal="padding">
+      <Text variant="title28" mb="s4">
+        {name}
+      </Text>
+      <Text variant="text18" mb="s24">
+        {country}
+      </Text>
+      <Text variant="text14">{description}</Text>
     </Box>
   );
 }
