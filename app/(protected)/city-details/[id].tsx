@@ -1,3 +1,4 @@
+import { Divider } from "@/src/components/Divider";
 import { Screen } from "@/src/components/Screen";
 import { Text } from "@/src/components/Text";
 import { useCityDetails } from "@/src/data/useCityDetais";
@@ -33,6 +34,8 @@ export default function CityDetails() {
         name={city.name}
         description={city.description}
       />
+
+      <Divider marginHorizontal="padding" />
       <CityDetailsTouristAttractions
         touristAttractions={city.touristAttractions}
       />
