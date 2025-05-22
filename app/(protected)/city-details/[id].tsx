@@ -22,7 +22,7 @@ export default function CityDetails() {
   }
 
   return (
-    <Screen>
+    <Screen style={{ paddingHorizontal: 0 }}>
       <CityDetailsHeader
         id={city.id}
         coverImage={city.coverImage}
