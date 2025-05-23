@@ -78,12 +78,26 @@ function AccordionItem({
       ),
     };
   });
+
+  const iconStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        rotate: isExpanded.value
+          ? withTiming("-180deg", { duration: 500 })
+          : withTiming("0deg", { duration: 500 }),
+      },
+    ],
+  }));
+
   return (
     <Pressable onPress={onPress}>
       <Animated.View style={[animatedStyle]}>
         <Box {...headerStyle}>
           <Text variant="title16">{title}</Text>
-          <Icon name="Chevron-down" color={"gray2"} />
+
+          <Animated.View style={iconStyle}>
+            <Icon name="Chevron-down" color={"gray2"} />
+          </Animated.View>
         </Box>
       </Animated.View>
       <AccordionWrapper isExpanded={isExpanded}>
