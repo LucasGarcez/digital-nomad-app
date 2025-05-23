@@ -1,50 +1,44 @@
-import { Pressable } from "react-native";
-import { Box, BoxProps } from "./Box";
-import { Icon } from "./Icon";
+import Animated, {
+  interpolate,
+  SharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+
+import { useAppTheme } from "../theme/useAppTheme";
 import { Text } from "./Text";
 
 type AccordionProps = {
   title: string;
   description: string;
+  progress: SharedValue<number>;
 };
 
-export function Accordion({ title, description }: AccordionProps) {
+export function Accordion({ description, progress }: AccordionProps) {
+  const { colors, spacing, borderRadii } = useAppTheme();
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    paddingHorizontal: spacing.s16,
+    paddingBottom: spacing.s16,
+    backgroundColor: colors.gray1,
+    borderBottomEndRadius: borderRadii.default,
+    borderBottomStartRadius: borderRadii.default,
+    borderTopLeftRadius: interpolate(
+      progress.value,
+      [0, 1],
+      [borderRadii.default, 0]
+    ),
+    borderTopRightRadius: interpolate(
+      progress.value,
+      [0, 1],
+      [borderRadii.default, 0]
+    ),
+    borderWidth: 2,
+    borderColor: colors.gray1,
+  }));
+
   return (
-    <Pressable>
-      <Box {...headerStyle}>
-        <Text variant="title16">{title}</Text>
-        <Icon name="Chevron-down" color={"gray2"} />
-      </Box>
-      <Box {...contentStyle}>
-        <Box
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
-          mb="s16"
-        >
-          <Text variant="title16">{title}</Text>
-          <Icon name="Chevron-up" color={"primary"} />
-        </Box>
-        <Text variant="text14">{description}</Text>
-      </Box>
-    </Pressable>
+    <Animated.View style={animatedStyle}>
+      <Text variant="text14">{description}</Text>
+    </Animated.View>
   );
 }
-
-const headerStyle: BoxProps = {
-  flexDirection: "row",
-  justifyContent: "space-between",
-  padding: "s16",
-  borderWidth: 2,
-  borderColor: "gray1",
-  borderRadius: "default",
-  alignItems: "center",
-};
-
-const contentStyle: BoxProps = {
-  padding: "s16",
-  backgroundColor: "gray1",
-  borderRadius: "default",
-  borderWidth: 2,
-  borderColor: "gray1",
-};

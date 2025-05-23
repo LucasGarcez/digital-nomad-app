@@ -15,7 +15,7 @@ export function CityDetailsHeader({
   coverImage,
 }: Pick<City, "id" | "coverImage" | "categories">) {
   const { top } = useSafeAreaInsets();
-  console.log(top);
+
   return (
     <Box>
       <ImageBackground
