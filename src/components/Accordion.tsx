@@ -10,7 +10,6 @@ import Animated, {
 } from "react-native-reanimated";
 
 import theme from "../theme/theme";
-import { Icon } from "./Icon";
 import { Text } from "./Text";
 
 type AccordionProps = {
@@ -35,12 +34,7 @@ export function Accordion({
 
   return (
     <Pressable onPress={onPress}>
-      <AccordionHeader
-        title={title}
-        progress={progress}
-        isExpanded={isExpanded}
-        duration={duration}
-      />
+      <AccordionHeader title={title} progress={progress} />
       <AccordionBody
         description={description}
         progress={progress}
@@ -54,20 +48,19 @@ export function Accordion({
 function AccordionHeader({
   title,
   progress,
-  isExpanded,
-  duration,
 }: {
   title: string;
   progress: SharedValue<number>;
-  isExpanded: SharedValue<boolean>;
-  duration: number;
 }) {
-  const iconStyle = useAnimatedStyle(() => ({
+  const imageStyle = useAnimatedStyle(() => ({
+    tintColor: interpolateColor(
+      progress.value,
+      [0, 1],
+      [theme.colors.gray2, theme.colors.primary]
+    ),
     transform: [
       {
-        rotate: isExpanded.value
-          ? withTiming("-180deg", { duration })
-          : withTiming("0deg", { duration }),
+        rotate: interpolate(progress.value, [0, 1], [0, -180]) + "deg",
       },
     ],
   }));
@@ -96,9 +89,10 @@ function AccordionHeader({
     <Animated.View style={[animatedHeaderStyled, styles.header]}>
       <Text variant="title16">{title}</Text>
 
-      <Animated.View style={iconStyle}>
-        <Icon name="Chevron-down" color={"gray2"} />
-      </Animated.View>
+      <Animated.Image
+        source={require("@/assets/images/chevron-down.png")}
+        style={[imageStyle, { width: 24, height: 24 }]}
+      />
     </Animated.View>
   );
 }
