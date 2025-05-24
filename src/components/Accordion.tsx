@@ -73,6 +73,7 @@ function AccordionHeader({
     ),
     borderBottomWidth: interpolate(progress.value, [0, 1], [2, 0]),
     borderColor: theme.colors.gray1,
+
     borderBottomLeftRadius: interpolate(
       progress.value,
       [0, 1],
@@ -119,6 +120,16 @@ function AccordionBody({
   const animatedBodyStyle = useAnimatedStyle(() => ({
     height: derivedHeight.value,
     opacity: interpolate(progress.value, [0, 1], [0, 1]),
+    borderTopLeftRadius: interpolate(
+      progress.value,
+      [0, 1],
+      [theme.borderRadii.default, 0]
+    ),
+    borderTopRightRadius: interpolate(
+      progress.value,
+      [0, 1],
+      [theme.borderRadii.default, 0]
+    ),
   }));
 
   return (
