@@ -8,11 +8,11 @@ import React from "react";
 import { Box } from "@/src/components/Box";
 import { BottomSheetMap } from "@/src/containers/BottomSheetMap";
 import { useSharedValue } from "react-native-reanimated";
-import { CityDetailsHeader } from "./components/CityDetailsHeader";
-import { CityDetailsInfo } from "./components/CityDetailsInfo";
-import { CityDetailsMap } from "./components/CityDetailsMap";
-import { CityDetailsRelatedCities } from "./components/CityDetailsRelatedCities";
-import { CityDetailsTouristAttractions } from "./components/CityDetailsTouristAttractions";
+import { CityDetailsHeader } from "../../../src/containers/CityDetailsHeader";
+import { CityDetailsInfo } from "../../../src/containers/CityDetailsInfo";
+import { CityDetailsMap } from "../../../src/containers/CityDetailsMap";
+import { CityDetailsRelatedCities } from "../../../src/containers/CityDetailsRelatedCities";
+import { CityDetailsTouristAttractions } from "../../../src/containers/CityDetailsTouristAttractions";
 
 export default function CityDetails() {
   const { id } = useLocalSearchParams();
