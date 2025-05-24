@@ -3,6 +3,7 @@ import { ImageBackground, Pressable } from "react-native";
 import { Link } from "expo-router";
 import { useAppTheme } from "../theme/useAppTheme";
 import { CityPreview } from "../types";
+import { BlackOpacity } from "./BlackOpacity";
 import { Box } from "./Box";
 import { Icon } from "./Icon";
 import { Text } from "./Text";
@@ -21,13 +22,7 @@ export function CityCard({ cityPreview }: CityCardProps) {
           style={{ width: "100%", height: 280 }}
           imageStyle={{ borderRadius: borderRadii.default }}
         >
-          <Box
-            position="absolute"
-            width="100%"
-            height="100%"
-            backgroundColor="midnightBlack"
-            opacity={0.25}
-          />
+          <BlackOpacity />
           <Box flex={1} padding="s24" justifyContent="space-between">
             <Box alignSelf="flex-end">
               <Icon name="Favorite-outline" color="text" />
