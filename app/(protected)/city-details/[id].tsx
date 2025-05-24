@@ -40,7 +40,12 @@ export default function CityDetails() {
       <CityDetailsTouristAttractions
         touristAttractions={city.touristAttractions}
       />
+
+      <Divider marginHorizontal="padding" />
+
       <CityDetailsMap location={city.location} />
+
+      <Divider marginHorizontal="padding" />
       <CityDetailsRelatedCities relatedCitiesIds={city.relatedCitiesIds} />
     </Screen>
   );
