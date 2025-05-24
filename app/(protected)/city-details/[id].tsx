@@ -5,6 +5,9 @@ import { useCityDetails } from "@/src/data/useCityDetais";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 
+import { Box } from "@/src/components/Box";
+import { BottomSheetMap } from "@/src/containers/BottomSheetMap";
+import { useSharedValue } from "react-native-reanimated";
 import { CityDetailsHeader } from "./components/CityDetailsHeader";
 import { CityDetailsInfo } from "./components/CityDetailsInfo";
 import { CityDetailsMap } from "./components/CityDetailsMap";
@@ -15,6 +18,12 @@ export default function CityDetails() {
   const { id } = useLocalSearchParams();
   const city = useCityDetails(id as string);
 
+  const isOpen = useSharedValue(false);
+
+  const toggleSheet = () => {
+    isOpen.value = !isOpen.value;
+  };
+
   if (!city) {
     return (
       <Screen>
@@ -24,29 +33,37 @@ export default function CityDetails() {
   }
 
   return (
-    <Screen scrollable style={{ paddingHorizontal: 0 }}>
-      <CityDetailsHeader
-        id={city.id}
-        coverImage={city.coverImage}
-        categories={city.categories}
+    <Box flex={1}>
+      <Screen scrollable style={{ paddingHorizontal: 0 }}>
+        <CityDetailsHeader
+          id={city.id}
+          coverImage={city.coverImage}
+          categories={city.categories}
+        />
+        <CityDetailsInfo
+          country={city.country}
+          name={city.name}
+          description={city.description}
+        />
+
+        <Divider marginHorizontal="padding" />
+        <CityDetailsTouristAttractions
+          touristAttractions={city.touristAttractions}
+        />
+
+        <Divider marginHorizontal="padding" />
+
+        <CityDetailsMap onPress={toggleSheet} location={city.location} />
+
+        <Divider marginHorizontal="padding" />
+        <CityDetailsRelatedCities relatedCitiesIds={city.relatedCitiesIds} />
+      </Screen>
+      <BottomSheetMap
+        isOpen={isOpen}
+        toggleSheet={toggleSheet}
+        latitude={city.location.latitude}
+        longitude={city.location.longitude}
       />
-      <CityDetailsInfo
-        country={city.country}
-        name={city.name}
-        description={city.description}
-      />
-
-      <Divider marginHorizontal="padding" />
-      <CityDetailsTouristAttractions
-        touristAttractions={city.touristAttractions}
-      />
-
-      <Divider marginHorizontal="padding" />
-
-      <CityDetailsMap location={city.location} />
-
-      <Divider marginHorizontal="padding" />
-      <CityDetailsRelatedCities relatedCitiesIds={city.relatedCitiesIds} />
-    </Screen>
+    </Box>
   );
 }
