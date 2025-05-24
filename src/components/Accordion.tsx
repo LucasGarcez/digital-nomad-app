@@ -10,6 +10,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import theme from "../theme/theme";
+import { Box } from "./Box";
 import { Text } from "./Text";
 
 type AccordionProps = {
@@ -88,7 +89,10 @@ function AccordionHeader({
 
   return (
     <Animated.View style={[animatedHeaderStyled, styles.header]}>
-      <Text variant="title16">{title}</Text>
+      {/* fix long title. (Bangkok) */}
+      <Box flexShrink={1}>
+        <Text variant="title16">{title}</Text>
+      </Box>
 
       <Animated.Image
         source={require("@/assets/images/chevron-down.png")}
