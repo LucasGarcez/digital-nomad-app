@@ -1,18 +1,32 @@
 import { Screen } from "@/src/components/Screen";
+import { Text } from "@/src/components/Text";
 import { CityDetailsHeader } from "@/src/containers/CityDetailsHeader";
 import { CityDetailsInfo } from "@/src/containers/CityDetailsInfo";
 import { CityDetailsMap } from "@/src/containers/CityDetailsMap";
 import { CityDetailsRelatedCities } from "@/src/containers/CityDetailsRelatedCities";
 import { CityDetailsTouristAttractions } from "@/src/containers/CityDetailsTouristAttractions";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useCityDetails } from "@/src/data/useCityDetails";
+import { useLocalSearchParams } from "expo-router";
 
 export default function CityDetails() {
-  const router = useRouter();
-  const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const city = useCityDetails(id);
+
+  if (!city) {
+    return (
+      <Screen flex={1} justifyContent="center" alignItems="center">
+        <Text>City not found</Text>
+      </Screen>
+    );
+  }
 
   return (
-    <Screen>
-      <CityDetailsHeader />
+    <Screen style={{ paddingHorizontal: 0 }}>
+      <CityDetailsHeader
+        id={city.id}
+        coverImage={city.coverImage}
+        categories={city.categories}
+      />
       <CityDetailsInfo />
       <CityDetailsTouristAttractions />
       <CityDetailsMap />
