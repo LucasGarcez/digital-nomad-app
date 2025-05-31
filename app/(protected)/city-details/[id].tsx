@@ -53,7 +53,7 @@ export default function CityDetails() {
         </Pressable>
 
         <Divider paddingHorizontal="padding" />
-        <CityDetailsRelatedCities />
+        <CityDetailsRelatedCities relatedCitiesIds={city.relatedCitiesIds} />
       </Screen>
       <BottomSheetMap
         location={city.location}
