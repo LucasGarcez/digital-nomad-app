@@ -31,7 +31,7 @@ const theme = createTheme({
     s40: 40,
     s48: 48,
     s56: 56,
-    padding: 16,
+    padding: 16, // default
   },
   textVariants: {
     defaults: {

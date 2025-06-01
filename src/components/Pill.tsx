@@ -10,6 +10,12 @@ export type PillProps = {
   onPress?: PressableProps["onPress"];
 };
 
+/**
+ * The height of the pill is the sum of the icon size, padding, and border width.
+ * This is used to calculate the marginTop of the pill to center it vertically.
+ */
+export const PILL_HEIGHT = 16 + 16 + 4;
+
 export function Pill({ label, iconName, active, onPress }: PillProps) {
   return (
     <Pressable onPress={onPress}>
