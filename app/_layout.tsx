@@ -5,6 +5,10 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
+if (__DEV__) {
+  require("../ReactotronConfig");
+}
+
 export default function RootLayout() {
   const [loaded] = useFonts({
     IcoMoon: require("../assets/icons/icomoon.ttf"),
