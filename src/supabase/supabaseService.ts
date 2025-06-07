@@ -3,9 +3,17 @@ import { supabase } from "./supabase";
 
 const storageURL = process.env.EXPO_PUBLIC_SUPABASE_STORAGE_URL;
 
-async function findAll(): Promise<CityPreview[]> {
+export type CityFilters = {
+  name?: string;
+  categoryId?: string | null;
+};
+
+async function findAll(filters: CityFilters): Promise<CityPreview[]> {
   try {
-    const { data } = await supabase.from("cities").select("*");
+    const { data } = await supabase
+      .from("cities")
+      .select("*")
+      .ilike("name", `%${filters.name}%`);
 
     if (!data) {
       throw new Error("data is not available");
