@@ -1,29 +1,57 @@
+import { useEffect, useState } from "react";
 import { supabaseService } from "../supabase/supabaseService";
 import { CityPreview } from "../types";
-import { cities } from "./cities";
 
 type CityFilter = {
   name?: string;
   categoryId?: string | null;
 };
 
-export function useCities({ name, categoryId }: CityFilter): {
-  cityPreviewList: CityPreview[];
-} {
-  supabaseService.findAll();
-  let cityPreviewList = [...cities];
+type UseCitiesReturn = {
+  cities?: CityPreview[];
+  isLoading: boolean;
+  error: unknown;
+};
 
-  if (name) {
-    cityPreviewList = cityPreviewList.filter((city) => {
-      return city.name.toLowerCase().includes(name.toLowerCase());
-    });
+export function useCities({ name, categoryId }: CityFilter): UseCitiesReturn {
+  const [cities, setCities] = useState<CityPreview[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<unknown>(null);
+
+  async function fetchData() {
+    try {
+      setIsLoading(true);
+      const cities = await supabaseService.findAll();
+      console.log(cities[0].coverImage);
+      setCities(cities);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
-  if (categoryId) {
-    cityPreviewList = cityPreviewList.filter((city) => {
-      return city.categories.some((category) => category.id === categoryId);
-    });
-  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  return { cityPreviewList };
+  return {
+    cities,
+    isLoading,
+    error,
+  };
 }
+
+// let cityPreviewList = [...cities];
+
+// if (name) {
+//   cityPreviewList = cityPreviewList.filter((city) => {
+//     return city.name.toLowerCase().includes(name.toLowerCase());
+//   });
+// }
+
+// if (categoryId) {
+//   cityPreviewList = cityPreviewList.filter((city) => {
+//     return city.categories.some((category) => category.id === categoryId);
+//   });
+// }
