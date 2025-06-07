@@ -104,10 +104,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "city_categories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "cities_with_categories"
+            referencedColumns: ["category_id"]
+          },
+          {
             foreignKeyName: "city_categories_city_id_fkey"
             columns: ["city_id"]
             isOneToOne: false
             referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "city_categories_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities_with_categories"
             referencedColumns: ["id"]
           },
         ]
@@ -134,10 +148,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "city_cities_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities_with_categories"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "city_cities_related_city_id_fkey"
             columns: ["related_city_id"]
             isOneToOne: false
             referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "city_cities_related_city_id_fkey"
+            columns: ["related_city_id"]
+            isOneToOne: false
+            referencedRelation: "cities_with_categories"
             referencedColumns: ["id"]
           },
         ]
@@ -193,10 +221,32 @@ export type Database = {
             referencedRelation: "cities"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "tourist_attractions_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities_with_categories"
+            referencedColumns: ["id"]
+          },
         ]
       }
     }
     Views: {
+      cities_with_categories: {
+        Row: {
+          category_code: string | null
+          category_description: string | null
+          category_id: string | null
+          category_name: string | null
+          country: string | null
+          cover_image: string | null
+          description: string | null
+          id: string | null
+          location: unknown | null
+          name: string | null
+        }
+        Relationships: []
+      }
       geography_columns: {
         Row: {
           coord_dimension: number | null

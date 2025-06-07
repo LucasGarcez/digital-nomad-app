@@ -17,7 +17,7 @@ export function useCities(filters: CityFilters): UseCitiesReturn {
     try {
       setIsLoading(true);
       const cities = await supabaseService.findAll(filters);
-      console.log(cities[0].coverImage);
+
       setCities(cities);
     } catch (error) {
       setError(error);
