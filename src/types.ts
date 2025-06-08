@@ -36,7 +36,7 @@ export type City = {
     longitude: number;
   };
   categories: Category[];
-  relatedCitiesIds: string[];
+  // relatedCitiesIds: string[];
 };
 
 export type CityPreview = Pick<City, "id" | "name" | "country" | "coverImage">;
