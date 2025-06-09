@@ -7,9 +7,9 @@ import { useRelatedCities } from "../data/useRelatedCities";
 import { useAppTheme } from "../theme/useAppTheme";
 import { City } from "../types";
 
-type Props = Pick<City, "relatedCitiesIds">;
-export function CityDetailsRelatedCities({ relatedCitiesIds }: Props) {
-  const cities = useRelatedCities(relatedCitiesIds);
+type Props = Pick<City, "id">;
+export function CityDetailsRelatedCities({ id }: Props) {
+  const { data: cities } = useRelatedCities(id);
 
   const { spacing } = useAppTheme();
   const { bottom } = useSafeAreaInsets();
@@ -31,7 +31,7 @@ export function CityDetailsRelatedCities({ relatedCitiesIds }: Props) {
           paddingHorizontal: spacing.padding,
         }}
       >
-        {cities.map((city) => (
+        {cities?.map((city) => (
           <CityCard
             key={city.id}
             cityPreview={city}

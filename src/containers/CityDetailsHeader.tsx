@@ -19,7 +19,9 @@ export function CityDetailsHeader({
   return (
     <Box>
       <ImageBackground
-        source={coverImage}
+        source={
+          typeof coverImage === "number" ? coverImage : { uri: coverImage }
+        }
         style={{ width: "100%", height: 250 }}
         imageStyle={{ borderBottomRightRadius: 40 }}
       >
