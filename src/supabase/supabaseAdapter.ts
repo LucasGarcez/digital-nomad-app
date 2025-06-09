@@ -1,4 +1,10 @@
-import { Category, CategoryCode, City, TouristAttraction } from "../types";
+import {
+  Category,
+  CategoryCode,
+  City,
+  CityPreview,
+  TouristAttraction,
+} from "../types";
 import { Database } from "./types";
 
 export const storageURL = process.env.EXPO_PUBLIC_SUPABASE_STORAGE_URL;
@@ -9,6 +15,13 @@ type CityWithFullInfo =
 type CategoryRow = Database["public"]["Tables"]["categories"]["Row"];
 type TouristAttractionRow =
   Database["public"]["Tables"]["tourist_attractions"]["Row"];
+
+type CityPreviewRow = {
+  id: string | null;
+  name: string | null;
+  country: string | null;
+  cover_image: string | null;
+};
 
 function toCity(data: CityWithFullInfo): City {
   const categories = data.categories as CategoryRow[];
@@ -28,6 +41,15 @@ function toCity(data: CityWithFullInfo): City {
     categories: categories.map(toCategory),
     touristAttractions: tourist_attractions.map(toTouristAttractions),
   };
+}
+
+function toCityPreview(row: CityPreviewRow): CityPreview {
+  return {
+    id: row.id,
+    country: row.country,
+    name: row.name,
+    coverImage: `${storageURL}/${row.cover_image}`,
+  } as CityPreview;
 }
 
 function toTouristAttractions(row: TouristAttractionRow): TouristAttraction {
@@ -50,4 +72,5 @@ function toCategory(row: CategoryRow): Category {
 
 export const supabaseAdapter = {
   toCity,
+  toCityPreview,
 };
