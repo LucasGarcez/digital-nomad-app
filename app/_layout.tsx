@@ -1,6 +1,6 @@
 import { AppStack } from "@/navigation/AppStack";
+import { InMemoryRepositories } from "@/src/infra/repositories/inMemory";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
-import { SupabaseRepositories } from "@/src/infra/repositories/supabase";
 import theme from "@/src/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
@@ -41,7 +41,7 @@ export default function RootLayout() {
   }
 
   return (
-    <RepositoryProvider value={SupabaseRepositories}>
+    <RepositoryProvider value={InMemoryRepositories}>
       <ThemeProvider theme={theme}>
         <AppStack />
         <StatusBar style="light" />
