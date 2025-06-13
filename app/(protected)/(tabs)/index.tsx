@@ -2,9 +2,9 @@ import { Box } from "@/src/components/Box";
 import { CityCard } from "@/src/components/CityCard";
 import { Screen } from "@/src/components/Screen";
 import { CityFilter } from "@/src/containers/CityFilter";
-import { useCategories } from "@/src/data/useCategories";
+import { useCategoryFindAll } from "@/src/features/category/operations/useCategoryFindAll";
 
-import { useCities } from "@/src/data/useCities";
+import { useCities } from "@/src/features/city/operations/useCities";
 import { useDebounce } from "@/src/hooks/useDebounce";
 import { useAppTheme } from "@/src/theme/useAppTheme";
 import { CityPreview } from "@/src/types";
@@ -29,7 +29,7 @@ export default function HomeScreen() {
     categoryId: selectedCategoryId,
   });
 
-  const { data: categories } = useCategories();
+  const { data: categories } = useCategoryFindAll();
 
   const flatListRef = useRef(null);
   useScrollToTop(flatListRef);
