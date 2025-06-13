@@ -1,7 +1,8 @@
-import { supabaseService } from "../supabase/supabaseService";
+import { useRepository } from "../infra/repositories/RepositoryProvider";
 import { useFetchData } from "./useFetchData";
 
 export function useRelatedCities(cityId: string) {
-  return useFetchData(() => supabaseService.getRelatedCities(cityId));
+  const { city } = useRepository();
+  return useFetchData(() => city.getRelatedCities(cityId));
 }
 // return cities.filter((city) => relatedCitiesIds.includes(city.id));
