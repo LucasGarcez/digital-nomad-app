@@ -1,4 +1,5 @@
 import { AppStack } from "@/navigation/AppStack";
+import { AuthProvider } from "@/src/features/auth/AuthContext";
 import { InMemoryRepositories } from "@/src/infra/repositories/inMemory";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
 import theme from "@/src/theme/theme";
@@ -41,11 +42,13 @@ export default function RootLayout() {
   }
 
   return (
-    <RepositoryProvider value={InMemoryRepositories}>
-      <ThemeProvider theme={theme}>
-        <AppStack />
-        <StatusBar style="light" />
-      </ThemeProvider>
-    </RepositoryProvider>
+    <AuthProvider>
+      <RepositoryProvider value={InMemoryRepositories}>
+        <ThemeProvider theme={theme}>
+          <AppStack />
+          <StatusBar style="light" />
+        </ThemeProvider>
+      </RepositoryProvider>
+    </AuthProvider>
   );
 }

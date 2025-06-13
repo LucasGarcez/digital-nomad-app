@@ -1,8 +1,14 @@
+import { useAuthStore } from "@/src/features/auth/AuthContext";
 import { Redirect, Stack } from "expo-router";
 
-const isSignedIn = true;
 export default function ProtectedLayout() {
-  if (isSignedIn) {
+  const { isSignedIn, isReady } = useAuthStore();
+
+  if (!isReady) {
+    return null;
+  }
+
+  if (!isSignedIn) {
     return <Redirect href="/sign-in" />;
   }
 
