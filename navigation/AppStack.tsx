@@ -5,6 +5,8 @@ export function AppStack() {
     <Stack
       screenOptions={{
         contentStyle: { backgroundColor: theme.colors.background },
+        headerShown: false,
+        fullScreenGestureEnabled: true,
       }}
     >
       <Stack.Screen name="(protected)" options={{ headerShown: false }} />
