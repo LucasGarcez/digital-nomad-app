@@ -1,6 +1,7 @@
 import { Box } from "@/src/components/Box";
 import { CityCard } from "@/src/components/CityCard";
 import { Screen } from "@/src/components/Screen";
+import { Text } from "@/src/components/Text";
 import { CityFilter } from "@/src/containers/CityFilter";
 import { useCategoryFindAll } from "@/src/features/category/operations/useCategoryFindAll";
 
@@ -24,7 +25,7 @@ export default function HomeScreen() {
     null
   );
 
-  const { data: cities } = useCities({
+  const { data: cities, error } = useCities({
     name: debouncedCityName,
     categoryId: selectedCategoryId,
   });
@@ -39,6 +40,15 @@ export default function HomeScreen() {
       <Box paddingHorizontal="padding">
         <CityCard cityPreview={item} />
       </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Screen>
+        <Text>Erro ao tentar buscar cidades</Text>
+        <Text>{error.message}</Text>
+      </Screen>
     );
   }
 
