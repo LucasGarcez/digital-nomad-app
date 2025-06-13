@@ -26,6 +26,7 @@ export default function SignInScreen() {
       <SafeAreaView>
         <Text mb="s48">Bem-vindo</Text>
         <TextInput
+          testID="email-input"
           label="E-mail"
           placeholder="voce@exemplo.com"
           value={email}
@@ -33,6 +34,7 @@ export default function SignInScreen() {
           mb="s16"
         />
         <TextInput
+          testID="password-input"
           label="Senha"
           placeholder="••••••••"
           secureTextEntry

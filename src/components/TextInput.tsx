@@ -9,7 +9,7 @@ import { Text } from "./Text";
 
 type TextInputProps = Pick<
   RNTextInputProps,
-  "value" | "onChangeText" | "placeholder" | "secureTextEntry"
+  "value" | "onChangeText" | "placeholder" | "secureTextEntry" | "testID"
 > & { label: string } & BoxProps;
 
 export function TextInput({
@@ -18,6 +18,7 @@ export function TextInput({
   placeholder,
   label,
   secureTextEntry,
+  testID,
   ...boxProps
 }: TextInputProps) {
   const { colors, textVariants } = useAppTheme();
@@ -39,6 +40,7 @@ export function TextInput({
           secureTextEntry={secureTextEntry}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          testID={testID}
           style={{
             ...textVariants.title16,
             color: colors.text,

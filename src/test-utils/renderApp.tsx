@@ -1,4 +1,4 @@
-import { fireEvent, renderRouter, screen } from "expo-router/testing-library";
+import { renderRouter } from "expo-router/testing-library";
 
 import HomeScreen from "@/app/(protected)/(tabs)";
 import TabLayout from "@/app/(protected)/(tabs)/_layout";
@@ -14,26 +14,61 @@ import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider"
 import theme from "@/src/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 
+import SignInScreen from "@/app/sign-in";
 import cloneDeep from "lodash.clonedeep";
 import merge from "lodash.merge";
+import { PropsWithChildren } from "react";
+import { AuthContext, AuthProvider } from "../features/auth/AuthContext";
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
-// https://lodash.com/docs/#merge
-// https://lodash.com/docs/#cloneDeep
-function renderComponent(repo?: DeepPartial<Repositories>) {
+function MockedAuthProvider({
+  children,
+  isSignedIn,
+}: PropsWithChildren<{ isSignedIn?: boolean }>) {
+  return (
+    <AuthContext.Provider
+      value={{
+        isReady: true,
+        isSignedIn: !!isSignedIn,
+        signIn: () => {},
+        signOut: () => {},
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function renderApp(params?: {
+  repositories?: DeepPartial<Repositories>;
+  /**
+   * Passing the `isSignedIn` will bypass the real auth flow
+   * (context and state updates). So, sign in or sign out won't
+   * switch the navigation stack. Use this property when you
+   * don't care about the auth state and just want your test
+   *  to start on Home Screen (`isSignedIn == true`)
+   * or SignIn Screen (`isSignedIn == false`)
+   */
+  isSignedIn?: boolean;
+}) {
   const finalRepo: Repositories = merge(
     cloneDeep(InMemoryRepositories),
-    repo ?? {}
+    params?.repositories ?? {}
   );
+
+  const FinalAuthProvider =
+    params?.isSignedIn !== undefined ? MockedAuthProvider : AuthProvider;
 
   function Wrapper({ children }: React.PropsWithChildren) {
     return (
-      <RepositoryProvider value={finalRepo}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </RepositoryProvider>
+      <FinalAuthProvider isSignedIn={params?.isSignedIn}>
+        <RepositoryProvider value={finalRepo}>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </RepositoryProvider>
+      </FinalAuthProvider>
     );
   }
 
@@ -46,31 +81,8 @@ function renderComponent(repo?: DeepPartial<Repositories>) {
       "(protected)/(tabs)/explore": () => <ExploreScreen />,
       "(protected)/(tabs)/profile": () => <ProfileScreen />,
       "(protected)/city-details/[id]": () => <CityDetails />,
+      "sign-in": () => <SignInScreen />,
     },
     { wrapper: Wrapper, initialUrl: "/" }
   );
 }
-
-describe("integration: Home", () => {
-  test("successfully", async () => {
-    renderComponent();
-    const element = await screen.findByText(/Rio de Janeiro/i);
-    fireEvent.press(element);
-
-    // multiple texts as Brasil
-    const detailElement = await screen.findAllByText(/Brasil/i);
-    expect(detailElement).toBeTruthy();
-  });
-
-  test("error on fetch cities", async () => {
-    renderComponent({
-      city: {
-        findAll: async () => {
-          return Promise.reject("servidor caiu :(");
-        },
-      },
-    });
-
-    expect(await screen.findByText(/servidor caiu/i)).toBeTruthy();
-  });
-});

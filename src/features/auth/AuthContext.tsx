@@ -38,6 +38,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     authUser: AuthUser | null;
   }) {
     try {
+      //TODO: mock storage via DI
       await AsyncStorage.setItem(AUTH_STATE_KEY, JSON.stringify(newState));
     } catch (error) {
       console.error(error);
