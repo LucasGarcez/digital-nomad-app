@@ -1,10 +1,18 @@
 import { AuthUser } from "@/src/features/auth/Auth";
-import { AuthRepository } from "@/src/features/auth/AuthRepository";
-import { authUsers } from "./data/authUsers";
+import {
+  AuthRepository,
+  AuthSignUpParams,
+} from "@/src/features/auth/AuthRepository";
 
 export class inMemoryAuthRepository implements AuthRepository {
+  users: AuthUser[];
+
+  constructor(users: AuthUser[]) {
+    this.users = users;
+  }
+
   async signIn(email: string, password: string): Promise<AuthUser> {
-    const user = authUsers.find(
+    const user = this.users.find(
       (user) => user.email.toLowerCase() === email.toLowerCase()
     );
     if (user) {
@@ -15,5 +23,13 @@ export class inMemoryAuthRepository implements AuthRepository {
 
   async signOut(): Promise<void> {
     // delay
+  }
+
+  async signUp(params: AuthSignUpParams): Promise<void> {
+    this.users.push({
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
+      email: params.email,
+    });
   }
 }

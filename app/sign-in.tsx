@@ -3,6 +3,7 @@ import { Screen } from "@/src/components/Screen";
 import { Text } from "@/src/components/Text";
 import { TextInput } from "@/src/components/TextInput";
 import { useAuthSignIn } from "@/src/features/auth/operations/useAuthSignIn";
+import { Link } from "expo-router";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -48,6 +49,12 @@ export default function SignInScreen() {
           onPress={handleSignIn}
           isLoading={isLoading}
         />
+
+        <Link href="/sign-up" asChild>
+          <Text mt="s24" alignSelf="center">
+            Ainda não tem uma conta? Criar
+          </Text>
+        </Link>
       </SafeAreaView>
     </Screen>
   );
