@@ -4,6 +4,7 @@ import { InMemoryRepositories } from "@/src/infra/repositories/inMemory";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
 import { asyncStorage } from "@/src/infra/storage/AsyncStorage";
 import { StorageProvider } from "@/src/infra/storage/StorageContext";
+import { Toast } from "@/src/infra/toast/Toast";
 import theme from "@/src/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
@@ -50,6 +51,7 @@ export default function RootLayout() {
           <ThemeProvider theme={theme}>
             <AppStack />
             <StatusBar style="light" />
+            <Toast />
           </ThemeProvider>
         </RepositoryProvider>
       </AuthProvider>

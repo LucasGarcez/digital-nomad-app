@@ -9,9 +9,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignInScreen() {
   const { mutate: signIn, isLoading } = useAuthSignIn({
-    onSuccess: (user) => {
-      console.log("success:", user.id);
-    },
     onError: (error) => console.log("error:", error.message),
   });
 
@@ -32,7 +29,6 @@ export default function SignInScreen() {
           placeholder="voce@exemplo.com"
           value={email}
           onChangeText={setEmail}
-          mb="s16"
         />
         <TextInput
           testID="password-input"

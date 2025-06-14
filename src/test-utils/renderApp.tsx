@@ -15,12 +15,14 @@ import theme from "@/src/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 
 import SignInScreen from "@/app/sign-in";
+import SignUpScreen from "@/app/sign-up";
 import cloneDeep from "lodash.clonedeep";
 import merge from "lodash.merge";
 import { PropsWithChildren } from "react";
 import { AuthContext, AuthProvider } from "../features/auth/AuthContext";
 import { inMemoryStorage } from "../infra/storage/InMemoryStorage";
 import { StorageProvider } from "../infra/storage/StorageContext";
+import { Toast } from "../infra/toast/Toast";
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
@@ -76,7 +78,12 @@ export function renderApp(params?: {
       <StorageProvider storage={inMemoryStorage}>
         <FinalAuthProvider isSignedIn={params?.isSignedIn}>
           <RepositoryProvider value={finalRepo}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <ThemeProvider theme={theme}>
+              <>
+                {children}
+                <Toast />
+              </>
+            </ThemeProvider>
           </RepositoryProvider>
         </FinalAuthProvider>
       </StorageProvider>
@@ -93,6 +100,7 @@ export function renderApp(params?: {
       "(protected)/(tabs)/profile": () => <ProfileScreen />,
       "(protected)/city-details/[id]": () => <CityDetails />,
       "sign-in": () => <SignInScreen />,
+      "sign-up": () => <SignUpScreen />,
     },
     { wrapper: Wrapper, initialUrl: "/" }
   );
