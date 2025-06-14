@@ -14,7 +14,7 @@ export const signUpSchema = z
       .min(6, "no mínimo 6 caracteres"),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "senhas deve ser igual",
+    message: "as senhas devem ser igual",
     path: ["confirmPassword"],
   });
 

@@ -33,4 +33,27 @@ describe("<SignUpForm />", () => {
       )
     );
   });
+  it("should not submit the form when the password and the confirm password do not match", async () => {
+    const signUpMock = jest.fn();
+    renderComponent(<SignUpForm signUp={signUpMock} isLoading={false} />);
+
+    fireEvent.changeText(screen.getByTestId("fullname-input"), "Lucas Garcez");
+
+    fireEvent.changeText(
+      screen.getByTestId("email-input"),
+      "lucas@coffstack.com"
+    );
+
+    fireEvent.changeText(screen.getByTestId("password-input"), "12345678");
+    fireEvent.changeText(
+      screen.getByTestId("confirm-password-input"),
+      "another password"
+    );
+
+    fireEvent.press(screen.getByText(/Criar conta/i));
+
+    expect(await screen.findByText(/senhas devem ser igual/i));
+
+    expect(signUpMock).not.toHaveBeenCalled();
+  });
 });
