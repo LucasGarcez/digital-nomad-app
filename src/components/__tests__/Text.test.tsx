@@ -1,17 +1,8 @@
-import theme from "@/src/theme/theme";
-import { ThemeProvider } from "@shopify/restyle";
-import { render, screen } from "@testing-library/react-native";
+import { renderComponent } from "@/src/test-utils/renderComponent";
+import { screen } from "@testing-library/react-native";
 import { Text } from "../Text";
 
-function renderComponent() {
-  render(
-    <ThemeProvider theme={theme}>
-      <Text>Ola mundo</Text>
-    </ThemeProvider>
-  );
-}
-
 test("<Text />", () => {
-  renderComponent();
+  renderComponent(<Text>Ola mundo</Text>);
   expect(screen.getByText("Ola mundo")).toBeOnTheScreen();
 });

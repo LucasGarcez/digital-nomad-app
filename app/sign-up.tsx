@@ -1,7 +1,7 @@
 import { Box } from "@/src/components/Box";
 import { IconButton } from "@/src/components/IconButton";
 import { Screen } from "@/src/components/Screen";
-import { SignUpForm } from "@/src/containers/SignUpForm";
+import { SignUpForm } from "@/src/containers/SignUpForm/SignUpForm";
 import { useAuthSignUp } from "@/src/features/auth/operations/useAuthSignUp";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";

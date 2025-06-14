@@ -1,20 +1,10 @@
-import { z } from "zod";
-
-import { Box } from "../components/Box";
-import { Button } from "../components/Button";
-import { TextInput } from "../components/TextInput";
+import { Box } from "../../components/Box";
+import { Button } from "../../components/Button";
+import { TextInput } from "../../components/TextInput";
 
 import { Controller, useForm } from "react-hook-form";
-import { AuthSignUpParams } from "../features/auth/AuthRepository";
-
-export const signUpSchema = z.object({
-  fullname: z.string().min(5, "nome muito curto"),
-  email: z.string().email("email inválido"),
-  password: z.string().min(6, "no mínimo 6 caracteres"),
-  confirmPassword: z.string().min(6, "no mínimo 6 caracteres"),
-});
-
-export type SignUpSchema = z.infer<typeof signUpSchema>;
+import { AuthSignUpParams } from "../../features/auth/AuthRepository";
+import { SignUpSchema } from "./SignUpSchema";
 
 type SignUpFormProps = {
   isLoading: boolean;
@@ -25,6 +15,7 @@ export function SignUpForm({ signUp, isLoading }: SignUpFormProps) {
   const { control, handleSubmit } = useForm<SignUpSchema>();
 
   function submitForm(formValues: SignUpSchema) {
+    console.log("submitForm:", formValues);
     signUp(formValues);
   }
   return (

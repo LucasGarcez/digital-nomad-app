@@ -4,8 +4,8 @@ import {
   AuthSignUpParams,
 } from "@/src/features/auth/AuthRepository";
 
-export class inMemoryAuthRepository implements AuthRepository {
-  users: AuthUser[];
+export class InMemoryAuthRepository implements AuthRepository {
+  private users: AuthUser[];
 
   constructor(users: AuthUser[]) {
     this.users = users;
@@ -25,11 +25,18 @@ export class inMemoryAuthRepository implements AuthRepository {
     // delay
   }
 
-  async signUp(params: AuthSignUpParams): Promise<void> {
+  /**
+   * When you pass signUp as a callback (e.g., someFunction(repo.signUp))
+   * you lose the this context, unless you bind it explicitly.
+   *
+   * That's why we need need to define the method as a class field (arrow function)
+   */
+
+  signUp = async (params: AuthSignUpParams): Promise<void> => {
     this.users.push({
       id: Date.now().toString(),
       createdAt: new Date().toISOString(),
       email: params.email,
     });
-  }
+  };
 }
