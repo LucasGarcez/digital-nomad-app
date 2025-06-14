@@ -2,6 +2,8 @@ import { AppStack } from "@/navigation/AppStack";
 import { AuthProvider } from "@/src/features/auth/AuthContext";
 import { InMemoryRepositories } from "@/src/infra/repositories/inMemory";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
+import { asyncStorage } from "@/src/infra/storage/AsyncStorage";
+import { StorageProvider } from "@/src/infra/storage/StorageContext";
 import theme from "@/src/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
@@ -42,13 +44,15 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthProvider>
-      <RepositoryProvider value={InMemoryRepositories}>
-        <ThemeProvider theme={theme}>
-          <AppStack />
-          <StatusBar style="light" />
-        </ThemeProvider>
-      </RepositoryProvider>
-    </AuthProvider>
+    <StorageProvider storage={asyncStorage}>
+      <AuthProvider>
+        <RepositoryProvider value={InMemoryRepositories}>
+          <ThemeProvider theme={theme}>
+            <AppStack />
+            <StatusBar style="light" />
+          </ThemeProvider>
+        </RepositoryProvider>
+      </AuthProvider>
+    </StorageProvider>
   );
 }

@@ -19,6 +19,8 @@ import cloneDeep from "lodash.clonedeep";
 import merge from "lodash.merge";
 import { PropsWithChildren } from "react";
 import { AuthContext, AuthProvider } from "../features/auth/AuthContext";
+import { inMemoryStorage } from "../infra/storage/InMemoryStorage";
+import { StorageProvider } from "../infra/storage/StorageContext";
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
@@ -28,11 +30,18 @@ function MockedAuthProvider({
   children,
   isSignedIn,
 }: PropsWithChildren<{ isSignedIn?: boolean }>) {
+  const authUser = isSignedIn
+    ? {
+        email: "lucas@coffstack.com",
+        id: "1",
+        createdAt: "iso-date",
+      }
+    : null;
   return (
     <AuthContext.Provider
       value={{
         isReady: true,
-        isSignedIn: !!isSignedIn,
+        authUser,
         signIn: () => {},
         signOut: () => {},
       }}
@@ -64,11 +73,13 @@ export function renderApp(params?: {
 
   function Wrapper({ children }: React.PropsWithChildren) {
     return (
-      <FinalAuthProvider isSignedIn={params?.isSignedIn}>
-        <RepositoryProvider value={finalRepo}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </RepositoryProvider>
-      </FinalAuthProvider>
+      <StorageProvider storage={inMemoryStorage}>
+        <FinalAuthProvider isSignedIn={params?.isSignedIn}>
+          <RepositoryProvider value={finalRepo}>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </RepositoryProvider>
+        </FinalAuthProvider>
+      </StorageProvider>
     );
   }
 
