@@ -11,7 +11,7 @@ export class InMemoryAuthRepository implements AuthRepository {
     this.users = users;
   }
 
-  async signIn(email: string, password: string): Promise<AuthUser> {
+  signIn = async (email: string, password: string): Promise<AuthUser> => {
     const user = this.users.find(
       (user) => user.email.toLowerCase() === email.toLowerCase()
     );
@@ -19,11 +19,11 @@ export class InMemoryAuthRepository implements AuthRepository {
       return user;
     }
     throw new Error("user not found");
-  }
+  };
 
-  async signOut(): Promise<void> {
+  signOut = async (): Promise<void> => {
     // delay
-  }
+  };
 
   /**
    * When you pass signUp as a callback (e.g., someFunction(repo.signUp))

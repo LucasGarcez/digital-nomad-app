@@ -2,9 +2,10 @@ import { Box } from "../../components/Box";
 import { Button } from "../../components/Button";
 import { TextInput } from "../../components/TextInput";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { AuthSignUpParams } from "../../features/auth/AuthRepository";
-import { SignUpSchema } from "./SignUpSchema";
+import { signUpSchema, SignUpSchema } from "./SignUpSchema";
 
 type SignUpFormProps = {
   isLoading: boolean;
@@ -12,10 +13,11 @@ type SignUpFormProps = {
 };
 
 export function SignUpForm({ signUp, isLoading }: SignUpFormProps) {
-  const { control, handleSubmit } = useForm<SignUpSchema>();
+  const { control, handleSubmit } = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
+  });
 
   function submitForm(formValues: SignUpSchema) {
-    console.log("submitForm:", formValues);
     signUp(formValues);
   }
   return (
@@ -23,35 +25,37 @@ export function SignUpForm({ signUp, isLoading }: SignUpFormProps) {
       <Controller
         control={control}
         name="fullname"
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <TextInput
             testID="fullname-input"
+            autoCapitalize="words"
             label="Nome completo"
             placeholder="Seu nome"
             value={field.value}
             onChangeText={field.onChange}
-            mb="s16"
+            errorMessage={fieldState.error?.message}
           />
         )}
       />
       <Controller
         control={control}
         name="email"
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <TextInput
+            autoCapitalize="none"
             testID="email-input"
             label="E-mail"
             placeholder="voce@exemplo.com"
             value={field.value}
             onChangeText={field.onChange}
-            mb="s16"
+            errorMessage={fieldState.error?.message}
           />
         )}
       />
       <Controller
         control={control}
         name="password"
-        render={({ field }) => (
+        render={({ field, fieldState }) => (
           <TextInput
             testID="password-input"
             label="Senha"
@@ -59,7 +63,22 @@ export function SignUpForm({ signUp, isLoading }: SignUpFormProps) {
             secureTextEntry
             value={field.value}
             onChangeText={field.onChange}
-            mb="s16"
+            errorMessage={fieldState.error?.message}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="confirmPassword"
+        render={({ field, fieldState }) => (
+          <TextInput
+            testID="confirm-password-input"
+            label="Confirmar Senha"
+            placeholder="••••••••"
+            secureTextEntry
+            value={field.value}
+            onChangeText={field.onChange}
+            errorMessage={fieldState.error?.message}
           />
         )}
       />

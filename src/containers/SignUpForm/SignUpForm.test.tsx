@@ -15,18 +15,22 @@ describe("<SignUpForm />", () => {
     );
 
     fireEvent.changeText(screen.getByTestId("password-input"), "12345678");
+    fireEvent.changeText(
+      screen.getByTestId("confirm-password-input"),
+      "12345678"
+    );
 
-    screen.debug();
-
-    fireEvent.press(/Criar conta/i);
+    fireEvent.press(screen.getByText(/Criar conta/i));
 
     await waitFor(() =>
-      expect(signUpMock).toHaveBeenCalledWith({
-        email: "lucas@coffstack.com",
-        fullname: "Lucas Garcez",
-        password: "12345678",
-      })
+      // using objectContaining because we don't care about the "confirmPassword"
+      expect(signUpMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          email: "lucas@coffstack.com",
+          fullname: "Lucas Garcez",
+          password: "12345678",
+        })
+      )
     );
-    // on submit for is a async function
   });
 });

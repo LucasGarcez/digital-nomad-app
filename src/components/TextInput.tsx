@@ -7,40 +7,39 @@ import { useAppTheme } from "../theme/useAppTheme";
 import { Box, BoxProps } from "./Box";
 import { Text } from "./Text";
 
-type TextInputProps = Pick<
-  RNTextInputProps,
-  "value" | "onChangeText" | "placeholder" | "secureTextEntry" | "testID"
-> & { label: string } & BoxProps;
+type TextInputProps = {
+  label: string;
+  errorMessage?: string;
+} & RNTextInputProps;
 
 export function TextInput({
-  value,
-  onChangeText,
-  placeholder,
   label,
-  secureTextEntry,
-  testID,
-  ...boxProps
+  errorMessage,
+  ...texInputProps
 }: TextInputProps) {
   const { colors, textVariants } = useAppTheme();
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <Box {...boxProps}>
-      <Text mb="s4">{label}</Text>
-
+    <Box>
+      <Text mb="s4" variant="text14Semibold">
+        {label}
+      </Text>
       <Box
         {...boxStyle}
-        style={{ borderColor: isFocused ? colors.text : colors.gray1 }}
+        style={{
+          borderColor: isFocused
+            ? errorMessage
+              ? colors.fbErrorSurface
+              : colors.text
+            : colors.gray1,
+        }}
       >
         <RNTextInput
-          value={value}
-          onChangeText={onChangeText}
-          placeholder={placeholder}
+          {...texInputProps}
           placeholderTextColor={colors.gray2}
-          secureTextEntry={secureTextEntry}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          testID={testID}
           style={{
             ...textVariants.title16,
             color: colors.text,
@@ -50,6 +49,9 @@ export function TextInput({
           }}
         />
       </Box>
+      <Text marginVertical="s4" variant="text12" color="fbErrorSurface">
+        {errorMessage}
+      </Text>
     </Box>
   );
 }
