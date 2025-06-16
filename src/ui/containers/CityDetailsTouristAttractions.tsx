@@ -1,7 +1,7 @@
+import { City } from "../../types";
 import { Accordion } from "../components/Accordion";
 import { Box } from "../components/Box";
 import { Text } from "../components/Text";
-import { City } from "../types";
 
 type Props = Pick<City, "touristAttractions">;
 export function CityDetailsTouristAttractions({ touristAttractions }: Props) {

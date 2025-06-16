@@ -1,7 +1,7 @@
-import theme from "@/src/theme/theme";
+import theme from "@/src/ui/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 import { render, screen } from "@testing-library/react-native";
-import { Text } from "../components/Text";
+import { Text } from "../ui/components/Text";
 
 function renderComponent() {
   render(

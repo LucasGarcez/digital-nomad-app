@@ -1,9 +1,6 @@
-import { Box } from "@/src/components/Box";
-import { IconButton } from "@/src/components/IconButton";
-import { Screen } from "@/src/components/Screen";
-import { SignUpForm } from "@/src/containers/SignUpForm/SignUpForm";
 import { useAuthSignUp } from "@/src/features/auth/operations/useAuthSignUp";
 import { toastService } from "@/src/infra/toast/ToastService";
+import { Box, IconButton, Screen, SignUpForm } from "@ui";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 

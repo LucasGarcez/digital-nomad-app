@@ -7,10 +7,10 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { Box } from "../components/Box";
+import { Text } from "../components/Text";
 import theme from "../theme/theme";
 import { useAppTheme } from "../theme/useAppTheme";
-import { Box } from "./Box";
-import { Text } from "./Text";
 
 type AccordionProps = {
   title: string;

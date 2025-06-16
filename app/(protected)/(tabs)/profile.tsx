@@ -1,8 +1,5 @@
-import { Box } from "@/src/components/Box";
-import { Icon } from "@/src/components/Icon";
-import { Screen } from "@/src/components/Screen";
-import { Text } from "@/src/components/Text";
 import { useAuthSignOut } from "@/src/features/auth/operations/useAuthSignOut";
+import { Box, Icon, Screen, Text } from "@ui";
 import { Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 

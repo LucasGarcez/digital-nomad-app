@@ -5,7 +5,7 @@ import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider"
 import { asyncStorage } from "@/src/infra/storage/AsyncStorage";
 import { StorageProvider } from "@/src/infra/storage/StorageContext";
 import { Toast } from "@/src/infra/toast/Toast";
-import theme from "@/src/theme/theme";
+import theme from "@/src/ui/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
 

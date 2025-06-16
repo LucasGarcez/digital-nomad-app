@@ -1,8 +1,5 @@
-import { Button } from "@/src/components/Button";
-import { Screen } from "@/src/components/Screen";
-import { Text } from "@/src/components/Text";
-import { TextInput } from "@/src/components/TextInput";
 import { useAuthSignIn } from "@/src/features/auth/operations/useAuthSignIn";
+import { Button, Screen, Text, TextInput } from "@ui";
 import { Link } from "expo-router";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";

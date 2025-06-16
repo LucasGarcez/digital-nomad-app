@@ -1,6 +1,6 @@
-import { Box } from "@/src/components/Box";
-import { Text } from "@/src/components/Text";
-import { ThemeColors } from "@/src/theme/theme";
+import { Box } from "@/src/ui/components/Box";
+import { Text } from "@/src/ui/components/Text";
+import { ThemeColors } from "@/src/ui/theme/theme";
 import RNToast, { ToastConfig } from "react-native-toast-message";
 
 type ToastType = "success" | "error" | "warning" | "info";

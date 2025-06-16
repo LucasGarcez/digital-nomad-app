@@ -11,7 +11,7 @@ import { AppStack } from "@/navigation/AppStack";
 import { InMemoryRepositories } from "@/src/infra/repositories/inMemory";
 import { Repositories } from "@/src/infra/repositories/Repositories";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
-import theme from "@/src/theme/theme";
+import theme from "@/src/ui/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
 
 import SignInScreen from "@/app/sign-in";

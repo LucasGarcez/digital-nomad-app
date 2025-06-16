@@ -4,7 +4,7 @@ import { TextInput } from "../../components/TextInput";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { AuthSignUpParams } from "../../features/auth/AuthRepository";
+import { AuthSignUpParams } from "../../../features/auth/AuthRepository";
 import { signUpSchema, SignUpSchema } from "./SignUpSchema";
 
 type SignUpFormProps = {

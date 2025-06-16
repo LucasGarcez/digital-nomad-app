@@ -1,13 +1,15 @@
-import { Divider } from "@/src/components/Divider";
-import { Screen } from "@/src/components/Screen";
-import { Text } from "@/src/components/Text";
-import { BottomSheetMap } from "@/src/containers/BottomSheetMap";
-import { CityDetailsHeader } from "@/src/containers/CityDetailsHeader";
-import { CityDetailsInfo } from "@/src/containers/CityDetailsInfo";
-import { CityDetailsMap } from "@/src/containers/CityDetailsMap";
-import { CityDetailsRelatedCities } from "@/src/containers/CityDetailsRelatedCities";
-import { CityDetailsTouristAttractions } from "@/src/containers/CityDetailsTouristAttractions";
 import { useCityFindById } from "@/src/features/city/operations/useCityFindById";
+import {
+  BottomSheetMap,
+  CityDetailsHeader,
+  CityDetailsInfo,
+  CityDetailsMap,
+  CityDetailsRelatedCities,
+  CityDetailsTouristAttractions,
+  Divider,
+  Screen,
+  Text,
+} from "@ui";
 import { useLocalSearchParams } from "expo-router";
 import { Pressable } from "react-native";
 import { useSharedValue } from "react-native-reanimated";

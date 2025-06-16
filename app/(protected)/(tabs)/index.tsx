@@ -1,13 +1,8 @@
-import { Box } from "@/src/components/Box";
-import { CityCard } from "@/src/components/CityCard";
-import { Screen } from "@/src/components/Screen";
-import { Text } from "@/src/components/Text";
-import { CityFilter } from "@/src/containers/CityFilter";
 import { useCategoryFindAll } from "@/src/features/category/operations/useCategoryFindAll";
+import { Box, CityCard, CityFilter, Screen, Text, useAppTheme } from "@ui";
 
 import { useCities } from "@/src/features/city/operations/useCities";
 import { useDebounce } from "@/src/hooks/useDebounce";
-import { useAppTheme } from "@/src/theme/useAppTheme";
 import { CityPreview } from "@/src/types";
 import { useScrollToTop } from "@react-navigation/native";
 import { useRef, useState } from "react";
