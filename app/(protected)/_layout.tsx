@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/src/features/auth/AuthContext";
+import { useAuthStore } from "@domain";
 import { Redirect, Stack } from "expo-router";
 
 export default function ProtectedLayout() {

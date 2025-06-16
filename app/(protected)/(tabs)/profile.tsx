@@ -1,4 +1,4 @@
-import { useAuthSignOut } from "@/src/features/auth/operations/useAuthSignOut";
+import { useAuthSignOut } from "@domain";
 import { Box, Icon, Screen, Text } from "@ui";
 import { Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";

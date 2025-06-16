@@ -4,6 +4,7 @@
     "strict": true,
     "paths": {
       "@ui": ["./src/ui"],
+      "@domain": ["./src/domain"],
       "@/*": ["./*"]
     }
   },

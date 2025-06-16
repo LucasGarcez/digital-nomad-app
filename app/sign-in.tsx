@@ -1,4 +1,4 @@
-import { useAuthSignIn } from "@/src/features/auth/operations/useAuthSignIn";
+import { useAuthSignIn } from "@domain";
 import { Button, Screen, Text, TextInput } from "@ui";
 import { Link } from "expo-router";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import { Repositories } from "../Repositories";
+import { Repositories } from "@domain";
 import { authUsers } from "./data/authUsers";
 import { InMemoryAuthRepository } from "./InMemoryAuthRepository";
 import { InMemoryCategoryRepository } from "./InMemoryCategoryRepository";

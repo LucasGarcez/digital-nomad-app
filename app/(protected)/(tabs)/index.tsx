@@ -1,9 +1,7 @@
-import { useCategoryFindAll } from "@/src/features/category/operations/useCategoryFindAll";
+import { CityPreview, useCategoryFindAll, useCities } from "@domain";
 import { Box, CityCard, CityFilter, Screen, Text, useAppTheme } from "@ui";
 
-import { useCities } from "@/src/features/city/operations/useCities";
 import { useDebounce } from "@/src/hooks/useDebounce";
-import { CityPreview } from "@/src/types";
 import { useScrollToTop } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import { ListRenderItemInfo } from "react-native";

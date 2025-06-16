@@ -1,11 +1,11 @@
 import { AppStack } from "@/navigation/AppStack";
-import { AuthProvider } from "@/src/features/auth/AuthContext";
 import { InMemoryRepositories } from "@/src/infra/repositories/inMemory";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
 import { asyncStorage } from "@/src/infra/storage/AsyncStorage";
 import { StorageProvider } from "@/src/infra/storage/StorageContext";
 import { Toast } from "@/src/infra/toast/Toast";
 import theme from "@/src/ui/theme/theme";
+import { AuthProvider } from "@domain";
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
 

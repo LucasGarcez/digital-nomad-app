@@ -1,5 +1,5 @@
+import { Repositories } from "@domain";
 import React from "react";
-import { Repositories } from "./Repositories";
 
 const RepositoryContext = React.createContext<Repositories>({} as Repositories);
 

@@ -1,5 +1,5 @@
-import { useAuthSignUp } from "@/src/features/auth/operations/useAuthSignUp";
 import { toastService } from "@/src/infra/toast/ToastService";
+import { useAuthSignUp } from "@domain";
 import { Box, IconButton, Screen, SignUpForm } from "@ui";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";

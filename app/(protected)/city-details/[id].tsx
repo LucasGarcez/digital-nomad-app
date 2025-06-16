@@ -1,4 +1,4 @@
-import { useCityFindById } from "@/src/features/city/operations/useCityFindById";
+import { useCityFindById } from "@domain";
 import {
   BottomSheetMap,
   CityDetailsHeader,

@@ -1,4 +1,4 @@
-import { Repositories } from "../Repositories";
+import { Repositories } from "../../../features/Repositories";
 import { SupabaseCategoryRepository } from "./SupabaseCategoryRepository";
 import { SupabaseCityRepository } from "./SupabaseCityRepository";
 

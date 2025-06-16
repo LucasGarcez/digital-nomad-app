@@ -1,4 +1,4 @@
-import { AuthUser } from "@/src/features/auth/Auth";
+import { AuthUser } from "@domain";
 
 export const authUsers: AuthUser[] = [
   { email: "lucas@coffstack.com", id: "1", createdAt: "iso-date" },
