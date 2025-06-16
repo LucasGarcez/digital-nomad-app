@@ -1,7 +1,7 @@
+import { City } from "@domain";
 import { router } from "expo-router";
 import { ImageBackground, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { City } from "../../types";
 import { BlackOpacity } from "../components/BlackOpacity";
 import { Box } from "../components/Box";
 import { CategoryPill } from "../components/CategoryPill";

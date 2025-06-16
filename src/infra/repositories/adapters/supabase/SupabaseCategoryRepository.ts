@@ -1,6 +1,5 @@
-import { Category, CategoryCode } from "@/src/features/category/Category";
-import { CategoryRepository } from "@/src/features/category/CategoryRepository";
-import { supabase } from "@/src/supabase/supabase";
+import { Category, CategoryCode, CategoryRepository } from "@domain";
+import { supabase } from "./supabase";
 
 export class SupabaseCategoryRepository implements CategoryRepository {
   async findAll(): Promise<Category[]> {

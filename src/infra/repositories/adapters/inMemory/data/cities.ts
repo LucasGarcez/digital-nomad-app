@@ -1,4 +1,4 @@
-import { City, CityPreview } from "@/src/features/city/City";
+import { City, CityPreview } from "@domain";
 import { categories } from "./categories";
 
 export const cities: (City & { relatedCitiesIds: string[] })[] = [

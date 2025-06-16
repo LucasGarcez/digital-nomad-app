@@ -1,10 +1,6 @@
-import { City, CityPreview } from "@/src/features/city/City";
-import {
-  CityFindAllFilters,
-  CityRepository,
-} from "@/src/features/city/CityRepository";
-import { supabase } from "@/src/supabase/supabase";
-import { supabaseAdapter } from "@/src/supabase/supabaseAdapter";
+import { City, CityFindAllFilters, CityPreview, CityRepository } from "@domain";
+import { supabase } from "./supabase";
+import { supabaseAdapter } from "./supabaseAdapter";
 
 async function findAll(filters: CityFindAllFilters): Promise<CityPreview[]> {
   try {

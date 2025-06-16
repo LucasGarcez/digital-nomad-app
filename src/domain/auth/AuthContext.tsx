@@ -1,4 +1,4 @@
-import { useStorage } from "@/src/infra/storage/StorageContext";
+import { useStorage } from "@/src/infra/storage/StorageProvider";
 import { SplashScreen, useRouter } from "expo-router";
 import {
   createContext,

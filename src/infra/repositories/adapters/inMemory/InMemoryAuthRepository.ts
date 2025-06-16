@@ -1,8 +1,4 @@
-import { AuthUser } from "@/src/features/auth/Auth";
-import {
-  AuthRepository,
-  AuthSignUpParams,
-} from "@/src/features/auth/AuthRepository";
+import { AuthRepository, AuthSignUpParams, AuthUser } from "@domain";
 
 export class InMemoryAuthRepository implements AuthRepository {
   private users: AuthUser[];

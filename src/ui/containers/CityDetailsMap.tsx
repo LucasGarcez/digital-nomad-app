@@ -1,5 +1,5 @@
+import { City } from "@domain";
 import MapView from "react-native-maps";
-import { City } from "../../types";
 import { Box } from "../components/Box";
 import { Text } from "../components/Text";
 import { useAppTheme } from "../theme/useAppTheme";

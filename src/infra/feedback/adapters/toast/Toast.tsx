@@ -2,17 +2,10 @@ import { Box } from "@/src/ui/components/Box";
 import { Text } from "@/src/ui/components/Text";
 import { ThemeColors } from "@/src/ui/theme/theme";
 import RNToast, { ToastConfig } from "react-native-toast-message";
-
-type ToastType = "success" | "error" | "warning" | "info";
-
-export type ToastComponentProps = {
-  type?: ToastType;
-  title: string;
-  message?: string;
-};
+import { FeedbackParams, FeedbackType } from "../../IFeedbackService";
 
 const toastColors: Record<
-  ToastType,
+  FeedbackType,
   {
     backgroundColor: ThemeColors;
     textColor: ThemeColors;
@@ -36,7 +29,7 @@ const toastColors: Record<
   },
 };
 
-function ToastComponent({ type, title, message }: ToastComponentProps) {
+function ToastComponent({ type, title, message }: FeedbackParams) {
   const { backgroundColor, textColor } = toastColors[type || "success"];
 
   return (

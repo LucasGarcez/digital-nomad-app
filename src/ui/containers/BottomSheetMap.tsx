@@ -1,6 +1,6 @@
+import { City } from "@domain";
 import { useWindowDimensions } from "react-native";
 import MapView from "react-native-maps";
-import { City } from "../../types";
 import { BottomSheet, BottomSheetProps } from "../components/BottomSheet";
 import { Box } from "../components/Box";
 import { IconButton } from "../components/IconButton";

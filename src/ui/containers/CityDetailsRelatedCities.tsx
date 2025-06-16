@@ -1,7 +1,7 @@
 import { useRelatedCities } from "@/src/data/useRelatedCities";
+import { City } from "@domain";
 import { ScrollView, useWindowDimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { City } from "../../types";
 import { Box } from "../components/Box";
 import { CityCard } from "../components/CityCard";
 import { Text } from "../components/Text";

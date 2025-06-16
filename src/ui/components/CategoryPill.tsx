@@ -1,4 +1,4 @@
-import { Category, CategoryCode } from "../../types";
+import { Category, CategoryCode } from "@domain";
 import { IconName } from "./Icon";
 import { Pill, PillProps } from "./Pill";
 

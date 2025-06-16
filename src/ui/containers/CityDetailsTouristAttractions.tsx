@@ -1,4 +1,4 @@
-import { City } from "../../types";
+import { City } from "@domain";
 import { Accordion } from "../components/Accordion";
 import { Box } from "../components/Box";
 import { Text } from "../components/Text";

@@ -2,9 +2,9 @@ import { Box } from "../../components/Box";
 import { Button } from "../../components/Button";
 import { TextInput } from "../../components/TextInput";
 
+import { AuthSignUpParams } from "@domain";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { AuthSignUpParams } from "../../../features/auth/AuthRepository";
 import { signUpSchema, SignUpSchema } from "./SignUpSchema";
 
 type SignUpFormProps = {

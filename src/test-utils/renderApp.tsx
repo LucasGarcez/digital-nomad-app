@@ -2,27 +2,29 @@ import { renderRouter } from "expo-router/testing-library";
 
 import HomeScreen from "@/app/(protected)/(tabs)";
 import TabLayout from "@/app/(protected)/(tabs)/_layout";
-import ProtectedLayout from "@/app/(protected)/_layout";
-import CityDetails from "@/app/(protected)/city-details/[id]";
-
 import ExploreScreen from "@/app/(protected)/(tabs)/explore";
 import ProfileScreen from "@/app/(protected)/(tabs)/profile";
-import { AppStack } from "@/navigation/AppStack";
-import { Repositories } from "@/src/features/Repositories";
-import { InMemoryRepositories } from "@/src/infra/repositories/inMemory";
-import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
-import theme from "@/src/ui/theme/theme";
+import ProtectedLayout from "@/app/(protected)/_layout";
+import CityDetails from "@/app/(protected)/city-details/[id]";
+import {
+  FeedbackProvider,
+  InMemoryRepositories,
+  inMemoryStorage,
+  RepositoryProvider,
+  StorageProvider,
+  Toast,
+  ToastFeedbackService,
+} from "@infra";
+
 import { ThemeProvider } from "@shopify/restyle";
+import { AppStack, theme } from "@ui";
 
 import SignInScreen from "@/app/sign-in";
 import SignUpScreen from "@/app/sign-up";
+import { AuthContext, AuthProvider, Repositories } from "@domain";
 import cloneDeep from "lodash.clonedeep";
 import merge from "lodash.merge";
 import { PropsWithChildren } from "react";
-import { AuthContext, AuthProvider } from "../features/auth/AuthContext";
-import { inMemoryStorage } from "../infra/storage/InMemoryStorage";
-import { StorageProvider } from "../infra/storage/StorageContext";
-import { Toast } from "../infra/toast/Toast";
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
@@ -75,18 +77,20 @@ export function renderApp(params?: {
 
   function Wrapper({ children }: React.PropsWithChildren) {
     return (
-      <StorageProvider storage={inMemoryStorage}>
-        <FinalAuthProvider isSignedIn={params?.isSignedIn}>
-          <RepositoryProvider value={finalRepo}>
-            <ThemeProvider theme={theme}>
-              <>
-                {children}
-                <Toast />
-              </>
-            </ThemeProvider>
-          </RepositoryProvider>
-        </FinalAuthProvider>
-      </StorageProvider>
+      <FeedbackProvider feedbackService={ToastFeedbackService}>
+        <StorageProvider storage={inMemoryStorage}>
+          <FinalAuthProvider isSignedIn={params?.isSignedIn}>
+            <RepositoryProvider value={finalRepo}>
+              <ThemeProvider theme={theme}>
+                <>
+                  {children}
+                  <Toast />
+                </>
+              </ThemeProvider>
+            </RepositoryProvider>
+          </FinalAuthProvider>
+        </StorageProvider>
+      </FeedbackProvider>
     );
   }
 

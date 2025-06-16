@@ -4,7 +4,7 @@ import {
   City,
   CityPreview,
   TouristAttraction,
-} from "../types";
+} from "@domain";
 import { Database } from "./types";
 
 export const storageURL = process.env.EXPO_PUBLIC_SUPABASE_STORAGE_URL;

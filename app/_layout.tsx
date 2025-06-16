@@ -1,12 +1,17 @@
-import { AppStack } from "@/navigation/AppStack";
-import { InMemoryRepositories } from "@/src/infra/repositories/inMemory";
-import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
-import { asyncStorage } from "@/src/infra/storage/AsyncStorage";
-import { StorageProvider } from "@/src/infra/storage/StorageContext";
-import { Toast } from "@/src/infra/toast/Toast";
-import theme from "@/src/ui/theme/theme";
+import { AppStack } from "@/src/ui/navigation/AppStack";
+
 import { AuthProvider } from "@domain";
+import {
+  asyncStorage,
+  FeedbackProvider,
+  InMemoryRepositories,
+  RepositoryProvider,
+  StorageProvider,
+  Toast,
+  ToastFeedbackService,
+} from "@infra";
 import { ThemeProvider } from "@shopify/restyle";
+import { theme } from "@ui";
 import { useFonts } from "expo-font";
 
 import { StatusBar } from "expo-status-bar";
@@ -45,16 +50,18 @@ export default function RootLayout() {
   }
 
   return (
-    <StorageProvider storage={asyncStorage}>
-      <AuthProvider>
-        <RepositoryProvider value={InMemoryRepositories}>
-          <ThemeProvider theme={theme}>
-            <AppStack />
-            <StatusBar style="light" />
-            <Toast />
-          </ThemeProvider>
-        </RepositoryProvider>
-      </AuthProvider>
-    </StorageProvider>
+    <FeedbackProvider feedbackService={ToastFeedbackService}>
+      <StorageProvider storage={asyncStorage}>
+        <AuthProvider>
+          <RepositoryProvider value={InMemoryRepositories}>
+            <ThemeProvider theme={theme}>
+              <AppStack />
+              <StatusBar style="light" />
+              <Toast />
+            </ThemeProvider>
+          </RepositoryProvider>
+        </AuthProvider>
+      </StorageProvider>
+    </FeedbackProvider>
   );
 }

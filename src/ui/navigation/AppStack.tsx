@@ -1,5 +1,5 @@
-import theme from "@/src/ui/theme/theme";
 import { Stack } from "expo-router";
+import { theme } from "../theme/theme";
 export function AppStack() {
   return (
     <Stack

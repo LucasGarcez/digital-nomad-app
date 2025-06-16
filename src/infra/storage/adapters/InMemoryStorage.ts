@@ -1,4 +1,4 @@
-import { IStorage } from "./StorageContext";
+import { IStorage } from "../IStorage";
 
 class InMemoryStorage implements IStorage {
   private store = new Map<string, any>();

@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { IStorage } from "./StorageContext";
+import { IStorage } from "../IStorage";
 
 export const asyncStorage: IStorage = {
   getItem: async (key) => {

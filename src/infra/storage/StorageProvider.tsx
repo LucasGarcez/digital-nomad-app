@@ -1,12 +1,7 @@
 import { createContext, PropsWithChildren, useContext } from "react";
+import { IStorage } from "./IStorage";
 
-export interface IStorage {
-  setItem: (key: string, value: any) => Promise<void>;
-  getItem: <IData>(key: string) => Promise<IData | null>;
-  removeItem: (key: string) => Promise<void>;
-}
-
-export const StorageContext = createContext<{ storage: IStorage }>({
+const StorageContext = createContext<{ storage: IStorage }>({
   storage: {} as IStorage,
 });
 

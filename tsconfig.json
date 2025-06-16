@@ -5,6 +5,7 @@
     "paths": {
       "@ui": ["./src/ui"],
       "@domain": ["./src/domain"],
+      "@infra": ["./src/infra"],
       "@/*": ["./*"]
     }
   },

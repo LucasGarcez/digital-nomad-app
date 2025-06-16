@@ -20,7 +20,8 @@ const palette = {
   fbInfoBg: "#332B1A",
   fbInfoSurface: "#42A5F5",
 };
-const theme = createTheme({
+
+export const theme = createTheme({
   colors: {
     background: palette.midnightBlack,
     primary: palette.fieryRed,
@@ -100,4 +101,3 @@ const theme = createTheme({
 
 export type Theme = typeof theme;
 export type ThemeColors = keyof Theme["colors"];
-export default theme;

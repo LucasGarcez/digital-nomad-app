@@ -1,8 +1,4 @@
-import { City, CityPreview } from "@/src/features/city/City";
-import {
-  CityFindAllFilters,
-  CityRepository,
-} from "@/src/features/city/CityRepository";
+import { City, CityFindAllFilters, CityPreview, CityRepository } from "@domain";
 import { cities } from "./data/cities";
 
 export class InMemoryCityRepository implements CityRepository {

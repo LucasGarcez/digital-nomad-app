@@ -1,16 +1,17 @@
-import { toastService } from "@/src/infra/toast/ToastService";
 import { useAuthSignUp } from "@domain";
+import { useFeedback } from "@infra";
 import { Box, IconButton, Screen, SignUpForm } from "@ui";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpScreen() {
   const router = useRouter();
+  const { feedbackService } = useFeedback();
 
   const { mutate: signUp, isLoading } = useAuthSignUp({
     onSuccess: () => {
       router.back();
-      toastService.show({
+      feedbackService.show({
         type: "success",
         title: "cadastro realizado com sucesso!",
       });
