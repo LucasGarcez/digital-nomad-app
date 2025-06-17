@@ -1,8 +1,8 @@
-import { useFetchData } from "@/src/data/useFetchData";
+import { useAppQuery } from "@/src/infra/operations/useAppQuery";
 import { useRepository } from "@/src/infra/repositories/RepositoryProvider";
 
 export function useCategoryFindAll() {
   const { category } = useRepository();
 
-  return useFetchData(() => category.findAll());
+  return useAppQuery(() => category.findAll());
 }

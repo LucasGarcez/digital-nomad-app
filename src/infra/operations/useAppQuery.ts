@@ -8,7 +8,7 @@ type UseFetchDataReturn<DataT> = {
   error: unknown;
 };
 
-export function useFetchData<DataT>(
+export function useAppQuery<DataT>(
   fetchData: () => Promise<DataT>,
   dependencies: React.DependencyList = []
 ): UseFetchDataReturn<DataT> {
