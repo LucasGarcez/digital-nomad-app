@@ -1,10 +1,5 @@
-import {
-  Category,
-  CategoryCode,
-  City,
-  CityPreview,
-  TouristAttraction,
-} from "../../../../types";
+import { Category, CategoryCode } from "@/src/domain/category/Category";
+import { City, CityPreview, TouristAttraction } from "@/src/domain/city/City";
 import { Database } from "./types";
 
 export const storageURL = process.env.EXPO_PUBLIC_SUPABASE_STORAGE_URL;

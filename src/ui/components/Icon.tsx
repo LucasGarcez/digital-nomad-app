@@ -3,7 +3,7 @@ import { ThemeColors } from "../theme/theme";
 import { useAppTheme } from "../theme/useAppTheme";
 
 const IconFromIcoMoon = createIconSetFromIcoMoon(
-  require("../../assets/icons/selection.json"),
+  require("../../../assets/icons/selection.json"),
   "IcoMoon",
   "icomoon.ttf"
 );
