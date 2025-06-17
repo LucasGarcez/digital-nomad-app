@@ -1,4 +1,4 @@
-import { InMemoryRepository } from "@/src/infra/repositories/adapters/inMemory";
+import { SupabaseRepositories } from "@/src/infra/repositories/adapters/supabase";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
 import theme from "@/src/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
@@ -40,7 +40,7 @@ export default function RootLayout() {
   }
 
   return (
-    <RepositoryProvider value={InMemoryRepository}>
+    <RepositoryProvider value={SupabaseRepositories}>
       <ThemeProvider theme={theme}>
         <Stack
           screenOptions={{
