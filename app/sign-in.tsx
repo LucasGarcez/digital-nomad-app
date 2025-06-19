@@ -4,6 +4,7 @@ import { Screen } from "@/src/ui/components/Screen";
 import { Text } from "@/src/ui/components/Text";
 import { TextInput } from "@/src/ui/components/TextInput";
 import { Logo } from "@/src/ui/containers/Logo";
+import { TextLink } from "@/src/ui/containers/TextLink";
 import { Link } from "expo-router";
 import { useState } from "react";
 
@@ -47,14 +48,11 @@ export default function SignInScreen() {
         </Link>
         <Button title="Entrar" onPress={handleSignIn} />
 
-        <Link href="/sign-up" asChild>
-          <Text alignSelf="center" mt="s16" color="gray2">
-            Ainda não tem uma conta?{" "}
-            <Text variant="title14" color="primary">
-              Criar
-            </Text>
-          </Text>
-        </Link>
+        <TextLink
+          href="/sign-up"
+          text="Ainda não tem uma conta?"
+          ctaText="Criar"
+        />
       </SafeAreaView>
     </Screen>
   );
