@@ -1,13 +1,14 @@
-import { Box } from "@/src/components/Box";
-import { CityCard } from "@/src/components/CityCard";
-import { Screen } from "@/src/components/Screen";
-import { CityFilter } from "@/src/containers/CityFilter";
-import { useCategories } from "@/src/data/useCategories";
+import { useCategoryFindAll } from "@/src/domain/category/operations/useCategoryFindAll";
+import { CityPreview } from "@/src/domain/city/City";
+import { Box } from "@/src/ui/components/Box";
+import { CityCard } from "@/src/ui/components/CityCard";
+import { Screen } from "@/src/ui/components/Screen";
+import { CityFilter } from "@/src/ui/containers/CityFilter";
 
-import { useCities } from "@/src/data/useCities";
-import { useDebounce } from "@/src/hooks/useDebounce";
-import { useAppTheme } from "@/src/theme/useAppTheme";
-import { CityPreview } from "@/src/types";
+import { useCityFindAll } from "@/src/domain/city/operations/useCityFindAll";
+import { useAppTheme } from "@/src/ui/theme/useAppTheme";
+import { useDebounce } from "@/src/utils/hooks/useDebounce";
+
 import { useScrollToTop } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import { ListRenderItemInfo } from "react-native";
@@ -24,12 +25,12 @@ export default function HomeScreen() {
     null
   );
 
-  const { data: cities } = useCities({
+  const { data: cities } = useCityFindAll({
     name: debouncedCityName,
     categoryId: selectedCategoryId,
   });
 
-  const { data: categories } = useCategories();
+  const { data: categories } = useCategoryFindAll();
 
   const flatListRef = useRef(null);
   useScrollToTop(flatListRef);
