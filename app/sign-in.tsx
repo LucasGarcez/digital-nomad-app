@@ -16,12 +16,14 @@ export default function SignInScreen() {
     <Screen>
       <SafeAreaView>
         <TextInput
+          autoCapitalize="none"
           style={styles.input}
           value={email}
           onChangeText={setEmail}
           placeholder="seu email"
         />
         <TextInput
+          autoCapitalize="none"
           style={styles.input}
           value={password}
           onChangeText={setPassword}
