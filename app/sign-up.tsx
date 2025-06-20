@@ -6,7 +6,8 @@ import { SignUpForm } from "@/src/ui/containers/SignUpForm/SignUpForm";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpScreen() {
-  function handleSignUp() {
+  function handleSignUp(data) {
+    console.log(data);
     //
   }
 
