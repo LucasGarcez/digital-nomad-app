@@ -1,4 +1,8 @@
-import { AuthSignUpParams, IAuthRepo } from "@/src/domain/auth/IAuthRepo";
+import {
+  AuthSignUpParams,
+  AuthUpdateUserParams,
+  IAuthRepo,
+} from "@/src/domain/auth/IAuthRepo";
 
 import { AuthUser } from "@/src/domain/auth/AuthUser";
 import { supabase } from "./supabase";
@@ -47,9 +51,18 @@ async function sessionChange(callback: (authUser: AuthUser | null) => void) {
   });
 }
 
+async function updateUser(params: AuthUpdateUserParams): Promise<void> {
+  const { error } = await supabase.auth.updateUser({ data: params });
+  if (error) {
+    throw new Error("auth error");
+  }
+  return;
+}
+
 export const SupabaseAuthRepo: IAuthRepo = {
   signIn,
   signOut,
   signUp,
   sendResetPasswordEmail,
+  updateUser,
 };
