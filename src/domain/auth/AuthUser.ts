@@ -1,6 +1,6 @@
 export type AuthUser = {
   id: string;
   email: string;
-  // fullname: string
+  fullname: string;
   // token: string
 };
