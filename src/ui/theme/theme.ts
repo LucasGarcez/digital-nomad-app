@@ -7,6 +7,18 @@ const palette = {
   stoneGrey: "#5C5C5C",
   pureWhite: "#FFFFFF",
   transparent: "transparent",
+
+  fbErrorBg: "#3A1B1B",
+  fbErrorSurface: "#D32F2F",
+
+  fbSuccessBg: "#1E3320",
+  fbSuccessSurface: "#4CAF50",
+
+  fbWarningBg: "#1A2B3A",
+  fbWarningSurface: "#FFC107",
+
+  fbInfoBg: "#332B1A",
+  fbInfoSurface: "#42A5F5",
 };
 const theme = createTheme({
   colors: {
@@ -54,6 +66,11 @@ const theme = createTheme({
       fontSize: 16,
       fontFamily: "PoppinsSemiBold",
       lineHeight: 18,
+    },
+    title14: {
+      fontSize: 14,
+      fontFamily: "PoppinsSemiBold",
+      lineHeight: 16,
     },
     text18: {
       fontSize: 18,
