@@ -1,5 +1,7 @@
+import { AuthUser } from "@/src/domain/auth/AuthUser";
 import { Category, CategoryCode } from "@/src/domain/category/Category";
 import { City, CityPreview, TouristAttraction } from "@/src/domain/city/City";
+import { AuthUser as SupaBaseAuthUser } from "@supabase/supabase-js";
 import { Database } from "./types";
 
 export const storageURL = process.env.EXPO_PUBLIC_SUPABASE_STORAGE_URL;
@@ -65,7 +67,19 @@ function toCategory(row: CategoryRow): Category {
   };
 }
 
+function toAuthUser(supabaseUser: SupaBaseAuthUser): AuthUser {
+  if (!supabaseUser.email) {
+    throw new Error("email not found");
+  }
+  return {
+    id: supabaseUser.id,
+    email: supabaseUser.email,
+    fullname: supabaseUser.user_metadata.fullname,
+  };
+}
+
 export const supabaseAdapter = {
   toCity,
   toCityPreview,
+  toAuthUser,
 };
