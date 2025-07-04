@@ -1,7 +1,8 @@
 import { AuthProvider } from "@/src/domain/auth/AuthContext";
-import { AlertFeedback } from "@/src/infra/feedbackService/adapters/Alert/AlertFeedback";
+import { Toast } from "@/src/infra/feedbackService/adapters/Toast/Toast";
+import { ToastFeedback } from "@/src/infra/feedbackService/adapters/Toast/ToastFeedback";
 import { FeedbackProvider } from "@/src/infra/feedbackService/FeedbackProvider";
-import { SupabaseRepositories } from "@/src/infra/repositories/adapters/supabase";
+import { InMemoryRepository } from "@/src/infra/repositories/adapters/inMemory";
 import { RepositoryProvider } from "@/src/infra/repositories/RepositoryProvider";
 import { AsyncStorage } from "@/src/infra/storage/adapters/AsyncStorage";
 import { StorageProvider } from "@/src/infra/storage/StorageContext";
@@ -47,8 +48,8 @@ export default function RootLayout() {
   return (
     <StorageProvider storage={AsyncStorage}>
       <AuthProvider>
-        <FeedbackProvider value={AlertFeedback}>
-          <RepositoryProvider value={SupabaseRepositories}>
+        <FeedbackProvider value={ToastFeedback}>
+          <RepositoryProvider value={InMemoryRepository}>
             <ThemeProvider theme={theme}>
               <Stack
                 screenOptions={{
@@ -65,6 +66,7 @@ export default function RootLayout() {
                 <Stack.Screen name="sign-in" />
               </Stack>
               <StatusBar style="light" />
+              <Toast />
             </ThemeProvider>
           </RepositoryProvider>
         </FeedbackProvider>
