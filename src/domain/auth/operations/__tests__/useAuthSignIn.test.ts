@@ -24,8 +24,12 @@ jest.mock("../../AuthContext", () => ({
   useAuth: () => ({ saveAuthUser: mockSaveAuthUser }),
 }));
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 describe("useAuthSignIn()", () => {
-  test("calls saveAuthUser and sends success feedback on successful sign in", async () => {
+  it("calls saveAuthUser and sends success feedback on successful sign in", async () => {
     const user: AuthUser = {
       id: "1",
       email: "lucas@coffstack.com",
@@ -49,6 +53,26 @@ describe("useAuthSignIn()", () => {
     expect(mockSendFeedback).toHaveBeenCalledWith({
       type: "success",
       message: `signed in: ${user.email}`,
+    });
+  });
+
+  it("sends an error feedback on failed sign in", async () => {
+    const error = new Error("invalid credentials");
+    mockSignIn.mockRejectedValueOnce(error);
+
+    const { result } = renderHook(() => useAuthSignIn());
+
+    await act(async () => {
+      await result.current.mutate({
+        email: "lucas@coffstack.com",
+        password: "password",
+      });
+    });
+
+    expect(mockSendFeedback).toHaveBeenCalledWith({
+      type: "error",
+      message: "error ao fazer login",
+      description: "invalid credentials",
     });
   });
 });
