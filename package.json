@@ -62,7 +62,10 @@
     "typescript": "~5.8.3"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "collectCoverageFrom": [
+      "{src,app}/**/*.{ts,tsx}"
+    ]
   },
   "private": true
 }
