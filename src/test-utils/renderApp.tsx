@@ -9,8 +9,12 @@ import SignUpScreen from "@/app/sign-up";
 import { renderRouter } from "expo-router/testing-library";
 import { AppStack } from "../ui/navigation/AppStack";
 
+import cloneDeep from "lodash.clonedeep";
+import merge from "lodash.merge";
+
 import { ThemeProvider } from "@shopify/restyle";
-import { AuthProvider } from "../domain/auth/AuthContext";
+import { AuthContext, AuthProvider } from "../domain/auth/AuthContext";
+import { Repositories } from "../domain/Repositories";
 import { Toast } from "../infra/feedbackService/adapters/Toast/Toast";
 import { ToastFeedback } from "../infra/feedbackService/adapters/Toast/ToastFeedback";
 import { FeedbackProvider } from "../infra/feedbackService/FeedbackProvider";
@@ -20,20 +24,61 @@ import { inMemoryStorage } from "../infra/storage/adapters/InMemoryStorage";
 import { StorageProvider } from "../infra/storage/StorageContext";
 import theme from "../ui/theme/theme";
 
-export function renderApp() {
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+
+function MockedAuthProvider({ children }: React.PropsWithChildren) {
+  const authUser = {
+    email: "lucas@coffstack.com",
+    id: "1",
+    createdAt: "iso-date",
+    fullname: "Lucas Garcez",
+  };
+  return (
+    <AuthContext.Provider
+      value={{
+        isReady: true,
+        authUser,
+        saveAuthUser: async () => {},
+        removeAuthUser: async () => {},
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function renderApp(params?: {
+  repositories?: DeepPartial<Repositories>;
+  /**
+   * when it is `true` will render the Protected Stack, which means the user will land
+   * in the Home screen. It uses a Mock Auth Provider.
+   */
+  isSignedIn?: boolean;
+}) {
   function Wrapper({ children }: React.PropsWithChildren) {
+    const finalRepo: Repositories = merge(
+      cloneDeep(InMemoryRepository),
+      params?.repositories ?? {}
+    );
+
+    const FinalAuthProvider = params?.isSignedIn
+      ? MockedAuthProvider
+      : AuthProvider;
+
     return (
       <StorageProvider storage={inMemoryStorage}>
-        <AuthProvider>
+        <FinalAuthProvider>
           <FeedbackProvider value={ToastFeedback}>
-            <RepositoryProvider value={InMemoryRepository}>
+            <RepositoryProvider value={finalRepo}>
               <ThemeProvider theme={theme}>
                 {children}
                 <Toast />
               </ThemeProvider>
             </RepositoryProvider>
           </FeedbackProvider>
-        </AuthProvider>
+        </FinalAuthProvider>
       </StorageProvider>
     );
   }

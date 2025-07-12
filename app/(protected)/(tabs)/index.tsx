@@ -9,6 +9,7 @@ import { useCityFindAll } from "@/src/domain/city/operations/useCityFindAll";
 import { useAppTheme } from "@/src/ui/theme/useAppTheme";
 import { useDebounce } from "@/src/utils/hooks/useDebounce";
 
+import { Text } from "@/src/ui/components/Text";
 import { useScrollToTop } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import { ListRenderItemInfo } from "react-native";
@@ -25,7 +26,7 @@ export default function HomeScreen() {
     null
   );
 
-  const { data: cities } = useCityFindAll({
+  const { data: cities, error } = useCityFindAll({
     name: debouncedCityName,
     categoryId: selectedCategoryId,
   });
@@ -40,6 +41,15 @@ export default function HomeScreen() {
       <Box paddingHorizontal="padding">
         <CityCard cityPreview={item} />
       </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Screen>
+        <Text>Erro ao tentar buscar cidades</Text>
+        {typeof error === "string" && <Text>{error}</Text>}
+      </Screen>
     );
   }
 
