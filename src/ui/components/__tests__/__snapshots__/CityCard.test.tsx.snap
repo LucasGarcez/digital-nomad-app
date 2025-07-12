@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CityCard /> should render the component 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  href="/city-details/1"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  role="link"
+>
+  <View
+    accessibilityIgnoresInvertColors={true}
+    style={
+      [
+        {
+          "height": 280,
+          "width": "100%",
+        },
+        undefined,
+      ]
+    }
+  >
+    <Image
+      source={
+        {
+          "uri": "fake-url",
+        }
+      }
+      style={
+        [
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          {
+            "height": 280,
+            "width": "100%",
+          },
+          {
+            "borderRadius": 16,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "backgroundColor": "#1B1B1B",
+            "height": "100%",
+            "opacity": 0.25,
+            "position": "absolute",
+            "width": "100%",
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        [
+          {
+            "flex": 1,
+            "justifyContent": "space-between",
+            "padding": 24,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignSelf": "flex-end",
+            },
+          ]
+        }
+      >
+        <View
+          testID="Favorite-outline"
+        />
+      </View>
+      <View
+        style={
+          [
+            {},
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "color": "#FFFFFF",
+                "fontFamily": "PoppinsSemiBold",
+                "fontSize": 22,
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          Bangkok
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "color": "#FFFFFF",
+                "fontFamily": "PoppinsRegular",
+                "fontSize": 16,
+                "lineHeight": 18,
+              },
+            ]
+          }
+        >
+          Brasil
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
