@@ -10,7 +10,8 @@ import { renderRouter } from "expo-router/testing-library";
 import { AppStack } from "../ui/navigation/AppStack";
 
 import { ThemeProvider } from "@shopify/restyle";
-import { AuthProvider } from "../domain/auth/AuthContext";
+import { AuthContext, AuthProvider } from "../domain/auth/AuthContext";
+import { AuthUser } from "../domain/auth/AuthUser";
 import { Toast } from "../infra/feedbackService/adapters/Toast/Toast";
 import { ToastFeedback } from "../infra/feedbackService/adapters/Toast/ToastFeedback";
 import { FeedbackProvider } from "../infra/feedbackService/FeedbackProvider";
@@ -20,11 +21,36 @@ import { inMemoryStorage } from "../infra/storage/adapters/InMemoryStorage";
 import { StorageProvider } from "../infra/storage/StorageContext";
 import theme from "../ui/theme/theme";
 
-export function renderApp() {
+function MockedAuthProvider({ children }: React.PropsWithChildren) {
+  const authUser: AuthUser = {
+    email: "lucas@coffstack.com",
+    id: "1",
+    fullname: "Lucas Garcez",
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        isReady: true,
+        authUser,
+        saveAuthUser: async () => {},
+        removeAuthUser: async () => {},
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function renderApp(options?: { isAuthenticated?: boolean }) {
+  const FinalAuthProvider = options?.isAuthenticated
+    ? MockedAuthProvider
+    : AuthProvider;
+
   function Wrapper({ children }: React.PropsWithChildren) {
     return (
       <StorageProvider storage={inMemoryStorage}>
-        <AuthProvider>
+        <FinalAuthProvider>
           <FeedbackProvider value={ToastFeedback}>
             <RepositoryProvider value={InMemoryRepository}>
               <ThemeProvider theme={theme}>
@@ -33,7 +59,7 @@ export function renderApp() {
               </ThemeProvider>
             </RepositoryProvider>
           </FeedbackProvider>
-        </AuthProvider>
+        </FinalAuthProvider>
       </StorageProvider>
     );
   }
