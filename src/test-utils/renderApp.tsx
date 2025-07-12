@@ -12,6 +12,7 @@ import { AppStack } from "../ui/navigation/AppStack";
 import { ThemeProvider } from "@shopify/restyle";
 import { AuthContext, AuthProvider } from "../domain/auth/AuthContext";
 import { AuthUser } from "../domain/auth/AuthUser";
+import { Repositories } from "../domain/Repositories";
 import { Toast } from "../infra/feedbackService/adapters/Toast/Toast";
 import { ToastFeedback } from "../infra/feedbackService/adapters/Toast/ToastFeedback";
 import { FeedbackProvider } from "../infra/feedbackService/FeedbackProvider";
@@ -20,6 +21,13 @@ import { RepositoryProvider } from "../infra/repositories/RepositoryProvider";
 import { inMemoryStorage } from "../infra/storage/adapters/InMemoryStorage";
 import { StorageProvider } from "../infra/storage/StorageContext";
 import theme from "../ui/theme/theme";
+
+import clonedeep from "lodash.clonedeep";
+import merge from "lodash.merge";
+
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
 
 function MockedAuthProvider({ children }: React.PropsWithChildren) {
   const authUser: AuthUser = {
@@ -42,7 +50,15 @@ function MockedAuthProvider({ children }: React.PropsWithChildren) {
   );
 }
 
-export function renderApp(options?: { isAuthenticated?: boolean }) {
+export function renderApp(options?: {
+  isAuthenticated?: boolean;
+  repositories?: DeepPartial<Repositories>;
+}) {
+  const finalRepository: Repositories = merge(
+    clonedeep(InMemoryRepository),
+    options?.repositories ?? {}
+  );
+
   const FinalAuthProvider = options?.isAuthenticated
     ? MockedAuthProvider
     : AuthProvider;
@@ -52,7 +68,7 @@ export function renderApp(options?: { isAuthenticated?: boolean }) {
       <StorageProvider storage={inMemoryStorage}>
         <FinalAuthProvider>
           <FeedbackProvider value={ToastFeedback}>
-            <RepositoryProvider value={InMemoryRepository}>
+            <RepositoryProvider value={finalRepository}>
               <ThemeProvider theme={theme}>
                 {children}
                 <Toast />

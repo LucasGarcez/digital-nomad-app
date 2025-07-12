@@ -32,6 +32,15 @@ export class InMemoryCityRepo implements ICityRepo {
         return city.categories.some((category) => category.id === categoryId);
       });
     }
+
+    // await new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve("");
+    //   }, 2000);
+    // });
+
+    // throw new Error("server is down!");
+
     return cityPreviewList;
   }
 }
