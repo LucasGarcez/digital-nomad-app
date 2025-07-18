@@ -22,6 +22,7 @@ import { inMemoryStorage } from "../infra/storage/adapters/InMemoryStorage";
 import { StorageProvider } from "../infra/storage/StorageContext";
 import theme from "../ui/theme/theme";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import clonedeep from "lodash.clonedeep";
 import merge from "lodash.merge";
 
@@ -54,6 +55,14 @@ export function renderApp(options?: {
   isAuthenticated?: boolean;
   repositories?: DeepPartial<Repositories>;
 }) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
   const finalRepository: Repositories = merge(
     clonedeep(InMemoryRepository),
     options?.repositories ?? {}
@@ -65,18 +74,20 @@ export function renderApp(options?: {
 
   function Wrapper({ children }: React.PropsWithChildren) {
     return (
-      <StorageProvider storage={inMemoryStorage}>
-        <FinalAuthProvider>
-          <FeedbackProvider value={ToastFeedback}>
-            <RepositoryProvider value={finalRepository}>
-              <ThemeProvider theme={theme}>
-                {children}
-                <Toast />
-              </ThemeProvider>
-            </RepositoryProvider>
-          </FeedbackProvider>
-        </FinalAuthProvider>
-      </StorageProvider>
+      <QueryClientProvider client={queryClient}>
+        <StorageProvider storage={inMemoryStorage}>
+          <FinalAuthProvider>
+            <FeedbackProvider value={ToastFeedback}>
+              <RepositoryProvider value={finalRepository}>
+                <ThemeProvider theme={theme}>
+                  {children}
+                  <Toast />
+                </ThemeProvider>
+              </RepositoryProvider>
+            </FeedbackProvider>
+          </FinalAuthProvider>
+        </StorageProvider>
+      </QueryClientProvider>
     );
   }
 
