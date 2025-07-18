@@ -3,5 +3,5 @@ import { useRepository } from "@/src/infra/repositories/RepositoryProvider";
 
 export function useCityFindById(id: string) {
   const { city } = useRepository();
-  return useAppQuery(() => city.findById(id));
+  return useAppQuery(["city", id], () => city.findById(id));
 }

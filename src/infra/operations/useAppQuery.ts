@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 type UseFetchDataReturn<DataT> = {
   data?: DataT;
@@ -7,31 +7,13 @@ type UseFetchDataReturn<DataT> = {
 };
 
 export function useAppQuery<DataT>(
-  fetchData: () => Promise<DataT>,
-  dependencies: React.DependencyList = []
+  queryKey: unknown[],
+  fetchData: () => Promise<DataT>
 ): UseFetchDataReturn<DataT> {
-  const [data, setData] = useState<DataT>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<unknown>(null);
-
-  async function _fetchData() {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const _data = await fetchData();
-
-      setData(_data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    _fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, dependencies);
+  const { isLoading, error, data } = useQuery({
+    queryKey: queryKey,
+    queryFn: fetchData,
+  });
 
   return {
     data,
