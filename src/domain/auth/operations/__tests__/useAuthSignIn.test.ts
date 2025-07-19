@@ -1,5 +1,5 @@
 import { AllTheProviders } from "@/src/test-utils/renderComponent";
-import { act, renderHook } from "@testing-library/react-native";
+import { act, cleanup, renderHook } from "@testing-library/react-native";
 import { AuthUser } from "../../AuthUser";
 import { useAuthSignIn } from "../useAuthSignIn";
 
@@ -30,6 +30,7 @@ beforeEach(() => {
 });
 
 describe("useAuthSignIn()", () => {
+  afterEach(() => cleanup());
   it("calls saveAuthUser and sends success feedback on successful sign in", async () => {
     const user: AuthUser = {
       id: "1",

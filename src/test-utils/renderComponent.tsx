@@ -9,6 +9,11 @@ export const AllTheProviders = ({ children }: React.PropsWithChildren) => {
     defaultOptions: {
       queries: {
         retry: false,
+        gcTime: Infinity,
+      },
+      mutations: {
+        retry: false,
+        gcTime: Infinity,
       },
     },
   });
