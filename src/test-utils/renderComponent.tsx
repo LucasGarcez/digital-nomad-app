@@ -3,20 +3,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, RenderOptions } from "@testing-library/react-native";
 import { ReactElement } from "react";
 import theme from "../ui/theme/theme";
+import { queryClientOptions } from "./queryClientOptions";
 
 export const AllTheProviders = ({ children }: React.PropsWithChildren) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-        gcTime: Infinity,
-      },
-      mutations: {
-        retry: false,
-        gcTime: Infinity,
-      },
-    },
-  });
+  const queryClient = new QueryClient(queryClientOptions);
 
   return (
     <QueryClientProvider client={queryClient}>

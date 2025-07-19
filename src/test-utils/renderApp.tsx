@@ -25,6 +25,7 @@ import theme from "../ui/theme/theme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import clonedeep from "lodash.clonedeep";
 import merge from "lodash.merge";
+import { queryClientOptions } from "./queryClientOptions";
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
@@ -55,13 +56,7 @@ export function renderApp(options?: {
   isAuthenticated?: boolean;
   repositories?: DeepPartial<Repositories>;
 }) {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
+  const queryClient = new QueryClient(queryClientOptions);
 
   const finalRepository: Repositories = merge(
     clonedeep(InMemoryRepository),
