@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 type UseAppMutationReturn<DataT, TVariables> = {
-  mutate: (variable: TVariables) => Promise<DataT | void>;
+  mutate: (variable: TVariables) => DataT | void;
   isLoading: boolean;
   error: unknown;
 };

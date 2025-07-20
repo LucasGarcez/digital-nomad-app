@@ -65,8 +65,40 @@ async function getRelatedCities(cityId: string): Promise<CityPreview[]> {
   return data.map(supabaseAdapter.toCityPreview);
 }
 
+async function saveFavorite(params: {
+  userId: string;
+  cityId: string;
+}): Promise<void> {
+  await supabase.from("favorite_cities").insert({
+    user_id: params.userId,
+    city_id: params.cityId,
+  });
+}
+
+async function listFavorites(userId: string) {
+  const { data } = await supabase
+    .from("favorite_cities")
+    .select(
+      `
+    city_id,
+    cities (
+      id,
+      name,
+      country,
+      cover_image
+    )
+  `
+    )
+    .eq("user_id", userId)
+    .throwOnError();
+
+  return data.map((item) => supabaseAdapter.toCityPreview(item.cities));
+}
+
 export const SupabaseCityRepo: ICityRepo = {
   findAll,
   findById,
   getRelatedCities,
+  saveFavorite,
+  listFavorites,
 };
