@@ -18,9 +18,19 @@ type CityPreviewRow = {
   name: string | null;
   country: string | null;
   cover_image: string | null;
+  favorite_cities?: {
+    user_id: string;
+  }[];
+  isFavorite?: boolean;
 };
 
-function toCity(data: CityWithFullInfo): City {
+function toCity(
+  data: CityWithFullInfo & {
+    favorite_cities?: {
+      user_id: string;
+    }[];
+  }
+): City {
   const categories = data.categories as CategoryRow[];
   const tourist_attractions =
     data.tourist_attractions as TouristAttractionRow[];
@@ -37,6 +47,7 @@ function toCity(data: CityWithFullInfo): City {
     },
     categories: categories.map(toCategory),
     touristAttractions: tourist_attractions.map(toTouristAttractions),
+    isFavorite: !!data?.favorite_cities?.length,
   };
 }
 
@@ -46,6 +57,7 @@ function toCityPreview(row: CityPreviewRow): CityPreview {
     country: row.country,
     name: row.name,
     coverImage: `${storageURL}/${row.cover_image}`,
+    isFavorite: row.isFavorite ?? !!row?.favorite_cities?.length,
   } as CityPreview;
 }
 

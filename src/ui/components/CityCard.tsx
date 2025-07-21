@@ -4,10 +4,9 @@ import { Link } from "expo-router";
 import { useAppTheme } from "../theme/useAppTheme";
 
 import { CityPreview } from "@/src/domain/city/City";
-import { useCitySaveFavorite } from "@/src/domain/city/operations/useCitySaveFavorite";
+import { CityFavoriteButton } from "../containers/CityFavoriteButton";
 import { BlackOpacity } from "./BlackOpacity";
 import { Box } from "./Box";
-import { Icon } from "./Icon";
 import { Text } from "./Text";
 
 type CityCardProps = {
@@ -17,7 +16,7 @@ type CityCardProps = {
 
 export function CityCard({ cityPreview, style }: CityCardProps) {
   const { borderRadii } = useAppTheme();
-  const { mutate: saveFavorite } = useCitySaveFavorite();
+
   return (
     <Link push href={`/city-details/${cityPreview.id}`} asChild>
       <Pressable>
@@ -32,11 +31,9 @@ export function CityCard({ cityPreview, style }: CityCardProps) {
         >
           <BlackOpacity />
           <Box flex={1} padding="s24" justifyContent="space-between">
-            <Pressable onPress={() => saveFavorite({ cityId: cityPreview.id })}>
-              <Box alignSelf="flex-end">
-                <Icon name="Favorite-outline" color="text" />
-              </Box>
-            </Pressable>
+            <Box alignSelf="flex-end">
+              <CityFavoriteButton city={cityPreview} />
+            </Box>
 
             <Box>
               <Text variant="title22">{cityPreview.name}</Text>

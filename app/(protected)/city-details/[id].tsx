@@ -36,6 +36,7 @@ export default function CityDetails() {
           id={city.id}
           coverImage={city.coverImage}
           categories={city.categories}
+          isFavorite={city.isFavorite}
         />
         <CityDetailsInfo
           name={city.name}

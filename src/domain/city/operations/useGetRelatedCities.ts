@@ -1,7 +1,12 @@
 import { useAppQuery } from "@/src/infra/operations/useAppQuery";
 import { useRepository } from "@/src/infra/repositories/RepositoryProvider";
+import { useAuth } from "../../auth/AuthContext";
 
-export function useGetRelatedCities(id: string) {
+export function useGetRelatedCities(cityId: string) {
   const { city } = useRepository();
-  return useAppQuery(["city", "related", id], () => city.getRelatedCities(id));
+  const { authUser } = useAuth();
+
+  return useAppQuery(["city", "related", cityId], () =>
+    city.getRelatedCities({ cityId, userId: authUser?.id as string })
+  );
 }

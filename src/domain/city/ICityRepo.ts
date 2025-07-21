@@ -5,10 +5,19 @@ export type CityFindAllFilters = {
   categoryId?: string | null;
 };
 
+export type CityToggleFavoriteParams = {
+  userId: string;
+  cityId: string;
+  isFavorite: boolean;
+};
+
 export interface ICityRepo {
-  findAll(filters: CityFindAllFilters): Promise<CityPreview[]>;
-  findById(id: string): Promise<City>;
-  getRelatedCities(cityId: string): Promise<CityPreview[]>;
-  saveFavorite(params: { userId: string; cityId: string }): Promise<void>;
+  findAll(filters: CityFindAllFilters, userId: string): Promise<CityPreview[]>;
+  findById(params: { id: string; userId: string }): Promise<City>;
+  getRelatedCities(params: {
+    cityId: string;
+    userId: string;
+  }): Promise<CityPreview[]>;
+  toggleFavorite(params: CityToggleFavoriteParams): Promise<void>;
   listFavorites(userId: string): Promise<CityPreview[]>;
 }

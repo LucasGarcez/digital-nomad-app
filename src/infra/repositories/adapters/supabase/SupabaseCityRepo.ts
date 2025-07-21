@@ -1,31 +1,39 @@
 import { City, CityPreview } from "../../../../domain/city/City";
-import { ICityRepo } from "../../../../domain/city/ICityRepo";
+import {
+  CityToggleFavoriteParams,
+  ICityRepo,
+} from "../../../../domain/city/ICityRepo";
 
 import { supabase } from "./supabase";
 import { supabaseAdapter } from "./supabaseAdapter";
+
+const CITY_PREVIEW_FIELDS =
+  "id,name,country,cover_image,favorite_cities!left(user_id)";
 
 export type CityFilters = {
   name?: string;
   categoryId?: string | null;
 };
 
-async function findAll(filters: CityFilters): Promise<CityPreview[]> {
+async function findAll(
+  filters: CityFilters,
+  userId: string
+): Promise<CityPreview[]> {
   try {
-    const fields = "id,name,country,cover_image";
-
     let cities;
     if (filters.categoryId) {
       const { data } = await supabase
         .from("cities_with_categories")
-        .select(fields)
+        .select(CITY_PREVIEW_FIELDS)
         .eq("category_id", filters.categoryId)
-        .ilike("name", `%${filters.name}%`);
+        .ilike("name", `%${filters.name}%`)
+        .eq("favorite_cities.user_id", userId);
 
       cities = data;
     } else {
       const { data } = await supabase
         .from("cities")
-        .select(fields)
+        .select(CITY_PREVIEW_FIELDS)
         .ilike("name", `%${filters.name}%`);
 
       cities = data;
@@ -41,11 +49,18 @@ async function findAll(filters: CityFilters): Promise<CityPreview[]> {
   }
 }
 
-async function findById(id: string): Promise<City> {
+async function findById({
+  id,
+  userId,
+}: {
+  id: string;
+  userId: string;
+}): Promise<City> {
   const { data, error } = await supabase
     .from("cities_with_full_info")
-    .select("*")
+    .select(`*,favorite_cities(user_id)`)
     .eq("id", id)
+    .eq("favorite_cities.user_id", userId) // importante: filtra a relação!
     .single();
 
   if (error) {
@@ -55,27 +70,42 @@ async function findById(id: string): Promise<City> {
   return supabaseAdapter.toCity(data);
 }
 
-async function getRelatedCities(cityId: string): Promise<CityPreview[]> {
+async function getRelatedCities({
+  cityId,
+  userId,
+}: {
+  cityId: string;
+  userId: string;
+}): Promise<CityPreview[]> {
   const { data } = await supabase
     .from("related_cities")
-    .select("*")
+    .select(CITY_PREVIEW_FIELDS)
     .eq("source_city_id", cityId)
+    .eq("favorite_cities.user_id", userId)
     .throwOnError();
 
   return data.map(supabaseAdapter.toCityPreview);
 }
 
-async function saveFavorite(params: {
-  userId: string;
-  cityId: string;
-}): Promise<void> {
-  await supabase.from("favorite_cities").insert({
-    user_id: params.userId,
-    city_id: params.cityId,
-  });
+async function toggleFavorite({
+  cityId,
+  userId,
+  isFavorite,
+}: CityToggleFavoriteParams): Promise<void> {
+  if (isFavorite) {
+    await supabase
+      .from("favorite_cities")
+      .delete()
+      .eq("user_id", userId)
+      .eq("city_id", cityId);
+  } else {
+    await supabase
+      .from("favorite_cities")
+      .insert({ user_id: userId, city_id: cityId });
+  }
 }
 
-async function listFavorites(userId: string) {
+async function listFavorites(userId: string): Promise<CityPreview[]> {
   const { data } = await supabase
     .from("favorite_cities")
     .select(
@@ -92,13 +122,15 @@ async function listFavorites(userId: string) {
     .eq("user_id", userId)
     .throwOnError();
 
-  return data.map((item) => supabaseAdapter.toCityPreview(item.cities));
+  return data.map((item) =>
+    supabaseAdapter.toCityPreview({ ...item.cities, isFavorite: true })
+  );
 }
 
 export const SupabaseCityRepo: ICityRepo = {
   findAll,
   findById,
   getRelatedCities,
-  saveFavorite,
+  toggleFavorite,
   listFavorites,
 };
