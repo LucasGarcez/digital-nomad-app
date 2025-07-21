@@ -1,6 +1,8 @@
+import { QueryKeys } from "@/src/infra/operations/QueryKeys";
 import { useAppMutation } from "@/src/infra/operations/useAppMutation";
 import { useRepository } from "@/src/infra/repositories/RepositoryProvider";
-import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import { CityPreview } from "../City";
 
@@ -11,8 +13,17 @@ export function useCityToggleFavorite(
   const { city } = useRepository();
   const { authUser } = useAuth();
 
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    setIsFavorite(params.isFavorite);
+  }, [params.isFavorite]);
+
   const mutation = useAppMutation<void, void>({
     mutateFn: () => toggleFavorite(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.city] });
+    },
     onError: () => {
       // error toast
       setIsFavorite((prev) => !prev);
