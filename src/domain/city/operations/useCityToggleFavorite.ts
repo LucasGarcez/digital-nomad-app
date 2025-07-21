@@ -23,6 +23,7 @@ export function useCityToggleFavorite(
     mutateFn: () => toggleFavorite(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.city] });
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.favorite] });
     },
     onError: () => {
       // error toast
