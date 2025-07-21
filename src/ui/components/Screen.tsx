@@ -20,7 +20,9 @@ export function Screen({
         paddingHorizontal="padding"
         {...boxProps}
       >
-        <Container showsVerticalScrollIndicator={false}>{children}</Container>
+        <Container style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+          {children}
+        </Container>
       </Box>
     </KeyboardAvoidingView>
   );

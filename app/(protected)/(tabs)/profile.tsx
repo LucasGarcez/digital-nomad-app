@@ -15,9 +15,9 @@ export default function ProfileScreen() {
         // ListHeaderComponent={<Header title="Perfil" canGoBack={false} />}
         ListFooterComponent={
           <Pressable onPress={signOut}>
-            <Box flexDirection="row" alignItems="center">
-              <Text>Sair</Text>
-              <Icon name="Logout" color="primary" />
+            <Box flexDirection="row" alignSelf="center" mt="s16">
+              <Icon name="Logout" color="fbErrorSurface" />
+              <Text color="fbErrorSurface">Sair</Text>
             </Box>
           </Pressable>
         }
