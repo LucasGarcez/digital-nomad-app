@@ -2,6 +2,7 @@ import { useAuth } from "@/src/domain/auth/AuthContext";
 import { AuthUser } from "@/src/domain/auth/AuthUser";
 import { useAuthSignOut } from "@/src/domain/auth/operations/useAuthSignOut";
 import { Box } from "@/src/ui/components/Box";
+import { Button } from "@/src/ui/components/Button";
 import { Icon } from "@/src/ui/components/Icon";
 import { Screen } from "@/src/ui/components/Screen";
 import { Text } from "@/src/ui/components/Text";
@@ -33,6 +34,13 @@ export default function ProfileScreen() {
 }
 
 function Header({ authUser }: { authUser: AuthUser }) {
+  function navigateToEditProfile() {
+    //
+  }
+  function navigateToEditPassword() {
+    //
+  }
+
   return (
     <Box>
       <Text variant="title16" alignSelf="center" mb="s40">
@@ -48,6 +56,32 @@ function Header({ authUser }: { authUser: AuthUser }) {
         label="Membro desde"
         value={dateUtils.getMonthAndYear(authUser.createdAt)}
       />
+
+      <Box
+        flexDirection="row"
+        columnGap="s16"
+        // backgroundColor="fbErrorBg"
+        mt="s16"
+      >
+        <Box flex={1}>
+          <Button
+            title="Editar perfil"
+            variant="secondary"
+            onPress={navigateToEditProfile}
+          />
+        </Box>
+        <Box flex={1}>
+          <Button
+            title="Alterar Senha"
+            variant="secondary"
+            onPress={navigateToEditPassword}
+          />
+        </Box>
+      </Box>
+
+      <Text variant="title16" mt="s24" mb="s16">
+        Favoritos
+      </Text>
     </Box>
   );
 }
