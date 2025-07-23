@@ -1,17 +1,30 @@
 import { City, CityPreview } from "@/src/domain/city/City";
-import { CityFindAllFilters, ICityRepo } from "@/src/domain/city/ICityRepo";
+import {
+  CityFindAllFilters,
+  CityToggleFavoriteParams,
+  ICityRepo,
+} from "@/src/domain/city/ICityRepo";
 import { cities } from "@/src/infra/repositories/adapters/inMemory/data/cities";
 
 export class InMemoryCityRepo implements ICityRepo {
-  async findById(id: string): Promise<City> {
-    const city = cities.find((city) => city.id === id);
+  toggleFavorite(params: CityToggleFavoriteParams): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+  listFavorites(userId: string): Promise<CityPreview[]> {
+    throw new Error("Method not implemented.");
+  }
+  async findById(params: { id: string; userId: string }): Promise<City> {
+    const city = cities.find((city) => city.id === params.id);
     if (city) {
       return city;
     }
     throw new Error("City not found");
   }
-  async getRelatedCities(cityId: string): Promise<CityPreview[]> {
-    const city = cities.find((city) => city.id === cityId);
+  async getRelatedCities(params: {
+    cityId: string;
+    userId: string;
+  }): Promise<CityPreview[]> {
+    const city = cities.find((city) => city.id === params.cityId);
     return cities.filter((c) => city?.relatedCitiesIds.includes(c.id));
   }
 
