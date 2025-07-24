@@ -9,7 +9,7 @@ type ProfileFooterProps = {
 export function ProfileFooter({ signOut }: ProfileFooterProps) {
   return (
     <Pressable onPress={signOut}>
-      <Box flexDirection="row" alignSelf="center" mt="s16">
+      <Box flexDirection="row" alignSelf="center" alignItems="center" mt="s16">
         <Icon name="Logout" color="fbErrorSurface" />
         <Text color="fbErrorSurface">Sair</Text>
       </Box>
