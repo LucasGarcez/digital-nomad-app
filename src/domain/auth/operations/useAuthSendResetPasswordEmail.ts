@@ -12,7 +12,7 @@ export function useAuthSendResetPasswordEmail(
   const feedbackService = useFeedbackService();
 
   return useAppMutation<void, { email: string }>({
-    mutateFn: ({ email }) => auth.sendResetPasswordEmail(email),
+    mutationFn: ({ email }) => auth.sendResetPasswordEmail(email),
     onSuccess: () => {
       options?.onSuccess?.();
       feedbackService.send({

@@ -39,7 +39,7 @@ describe("useAuthSignIn()", () => {
 
     const { result } = renderHook(() => useAuthSignIn());
 
-    expect(result.current.isLoading).toBe(false);
+    expect(result.current.isPending).toBe(false);
 
     await act(async () => {
       await result.current.mutate({

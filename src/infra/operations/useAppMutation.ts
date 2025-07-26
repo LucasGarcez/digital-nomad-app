@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 type UseAppMutationReturn<DataT, TVariables> = {
-  mutate: (variable: TVariables) => Promise<DataT | void>;
-  isLoading: boolean;
+  mutate: (variable: TVariables) => DataT | void;
+  isPending: boolean;
   error: unknown;
 };
 
@@ -12,37 +12,26 @@ export type UseAppMutationOptions<TData> = {
 };
 
 type UseAppMutationParams<TData, TVariables> = {
-  mutateFn: (variable: TVariables) => Promise<TData>;
+  mutationFn: (variable: TVariables) => Promise<TData>;
 } & UseAppMutationOptions<TData>;
 
 export function useAppMutation<TData, TVariables>({
-  mutateFn,
+  mutationFn,
   onSuccess,
   onError,
 }: UseAppMutationParams<TData, TVariables>): UseAppMutationReturn<
   TData,
   TVariables
 > {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<unknown>(null);
-
-  async function mutate(variables: TVariables) {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const data = await mutateFn(variables);
-      onSuccess?.(data);
-    } catch (error) {
-      onError?.(error);
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const { isPending, error, mutate } = useMutation({
+    mutationFn,
+    onSuccess,
+    onError,
+  });
 
   return {
     mutate,
-    isLoading,
+    isPending,
     error,
   };
 }
