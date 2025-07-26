@@ -1,3 +1,4 @@
+import { useAuthGetUser } from "@/src/domain/auth/operations/useAuthGetUser";
 import { useAuthSignOut } from "@/src/domain/auth/operations/useAuthSignOut";
 import { Box } from "@/src/ui/components/Box";
 import { Icon } from "@/src/ui/components/Icon";
@@ -9,6 +10,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
   const { mutate: signOut } = useAuthSignOut();
+  const { data } = useAuthGetUser();
+
+  console.log({ data });
   return (
     <Screen>
       <SafeAreaView>
