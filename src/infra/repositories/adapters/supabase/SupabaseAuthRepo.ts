@@ -1,6 +1,7 @@
 import { AuthUser } from "@/src/domain/auth/AuthUser";
 import {
   AuthSignUpParams,
+  AuthUpdatePasswordParams,
   AuthUpdateProfileParams,
   IAuthRepo,
 } from "@/src/domain/auth/IAuthRepo";
@@ -54,6 +55,17 @@ export class SupabaseAuthRepo implements IAuthRepo {
     const { error } = await supabase.auth.updateUser({
       email: params.email,
       data: { fullname: params.fullname },
+    });
+    if (error) {
+      throw new Error("error updating user");
+    }
+  };
+  updatePassword = async (params: AuthUpdatePasswordParams): Promise<void> => {
+    const authUser = await this.getUser();
+    await this.signIn(authUser.email, params.currentPassword);
+
+    const { error } = await supabase.auth.updateUser({
+      password: params.newPassword,
     });
     if (error) {
       throw new Error("error updating user");
