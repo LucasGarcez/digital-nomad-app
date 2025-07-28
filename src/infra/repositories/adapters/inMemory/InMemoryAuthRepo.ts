@@ -34,4 +34,12 @@ export class InMemoryAuthRepo implements IAuthRepo {
   async getUser(): Promise<AuthUser> {
     return authUsers[0];
   }
+
+  async updateProfile(): Promise<void> {
+    return;
+  }
+
+  async updatePassword(): Promise<void> {
+    return;
+  }
 }
