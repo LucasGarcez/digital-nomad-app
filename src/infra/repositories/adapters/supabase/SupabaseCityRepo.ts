@@ -65,8 +65,63 @@ async function getRelatedCities(cityId: string): Promise<CityPreview[]> {
   return data.map(supabaseAdapter.toCityPreview);
 }
 
+async function listFavorites(): Promise<CityPreview[]> {
+  const session = await supabase.auth.getSession();
+
+  if (session.error || !session.data.session) {
+    throw new Error("invalid session");
+  }
+
+  const { data } = await supabase
+    .from("favorite_cities")
+    .select(
+      `
+    city_id,
+    cities (
+      id,
+      name,
+      country,
+      cover_image
+    )
+  `
+    )
+    .eq("user_id", userId)
+    .throwOnError();
+
+  return data.map((item) =>
+    supabaseAdapter.toCityPreview({ ...item.cities, isFavorite: true })
+  );
+}
+
+async function toggleFavorite(
+  cityId: string,
+  isFavorite: boolean
+): Promise<void> {
+  const { data, error } = await supabase.auth.getSession();
+
+  if (error || !data.session) {
+    throw new Error("invalid session");
+  }
+
+  const userId = data.session?.user.id;
+
+  if (isFavorite) {
+    await supabase
+      .from("favorite_cities")
+      .delete()
+      .eq("user_id", userId)
+      .eq("city_id", cityId);
+  } else {
+    await supabase
+      .from("favorite_cities")
+      .insert({ user_id: userId, city_id: cityId });
+  }
+}
+
 export const SupabaseCityRepo: ICityRepo = {
   findAll,
   findById,
   getRelatedCities,
+  listFavorites,
+  toggleFavorite,
 };
