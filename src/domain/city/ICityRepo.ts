@@ -5,8 +5,14 @@ export type CityFindAllFilters = {
   categoryId?: string | null;
 };
 
+export type CityToggleFavoriteParams = {
+  cityId: string;
+  isFavorite: boolean;
+};
+
 export interface ICityRepo {
   findAll(filters: CityFindAllFilters): Promise<CityPreview[]>;
   findById(id: string): Promise<City>;
   getRelatedCities(cityId: string): Promise<CityPreview[]>;
+  toggleFavorite(params: CityToggleFavoriteParams): Promise<void>;
 }
