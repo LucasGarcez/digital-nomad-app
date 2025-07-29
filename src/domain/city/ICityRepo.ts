@@ -15,4 +15,5 @@ export interface ICityRepo {
   findById(id: string): Promise<City>;
   getRelatedCities(cityId: string): Promise<CityPreview[]>;
   toggleFavorite(params: CityToggleFavoriteParams): Promise<void>;
+  findAllFavorites(): Promise<CityPreview[]>;
 }
