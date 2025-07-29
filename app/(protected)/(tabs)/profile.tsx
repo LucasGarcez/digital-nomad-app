@@ -2,7 +2,7 @@ import { useAuthGetUser } from "@/src/domain/auth/operations/useAuthGetUser";
 import { useAuthSignOut } from "@/src/domain/auth/operations/useAuthSignOut";
 import { useFindAllFavorites } from "@/src/domain/city/operations/useFindAllFavorites";
 import { Box } from "@/src/ui/components/Box";
-import { CityCard } from "@/src/ui/components/CityCard";
+import { FavoriteCityCard } from "@/src/ui/components/FavoriteCityCard";
 import { Icon } from "@/src/ui/components/Icon";
 import { Screen } from "@/src/ui/components/Screen";
 import { Text } from "@/src/ui/components/Text";
@@ -21,9 +21,11 @@ export default function ProfileScreen() {
       <SafeAreaView>
         {authUser && <ProfileHeader authUser={authUser} />}
 
-        {favoriteList?.map((cityPreview) => (
-          <CityCard key={cityPreview.id} cityPreview={cityPreview} />
-        ))}
+        <Box mt="s16" rowGap="s16">
+          {favoriteList?.map((cityPreview) => (
+            <FavoriteCityCard key={cityPreview.id} cityPreview={cityPreview} />
+          ))}
+        </Box>
 
         <Pressable onPress={signOut}>
           <Box
