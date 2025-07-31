@@ -38,7 +38,12 @@ export function CityCard({ cityPreview, style }: CityCardProps) {
                 toggleFavorite({ cityId: cityPreview.id, isFavorite: false });
               }}
             >
-              <Icon name="Favorite-outline" color="text" />
+              <Icon
+                name={
+                  cityPreview.isFavorite ? "Favorite-fill" : "Favorite-outline"
+                }
+                color={cityPreview.isFavorite ? "primary" : "text"}
+              />
             </TouchableOpacityBox>
 
             <Box>
