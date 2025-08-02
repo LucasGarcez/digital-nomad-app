@@ -15,7 +15,7 @@ export function CategoryPill({ category, ...pillProps }: CategoryPillProps) {
   );
 }
 
-const categoryIconMap: Record<CategoryCode, IconName> = {
+export const categoryIconMap: Record<CategoryCode, IconName> = {
   ADVENTURE: "Adventure",
   BEACH: "Beach",
   CULTURE: "Culture",
