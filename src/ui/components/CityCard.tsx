@@ -1,4 +1,4 @@
-import { ImageBackground, ImageBackgroundProps, Pressable } from "react-native";
+import { ImageBackground, Pressable, useWindowDimensions } from "react-native";
 
 import { Link } from "expo-router";
 import { useAppTheme } from "../theme/useAppTheme";
@@ -11,11 +11,20 @@ import { Text } from "./Text";
 
 type CityCardProps = {
   cityPreview: CityPreview;
-  style?: ImageBackgroundProps["style"];
+  size?: "small" | "large";
+  // style?: ImageBackgroundProps["style"];
 };
 
-export function CityCard({ cityPreview, style }: CityCardProps) {
+export function CityCard({ cityPreview, size = "large" }: CityCardProps) {
   const { borderRadii } = useAppTheme();
+
+  const { width } = useWindowDimensions();
+
+  const cardWith = width * 0.7;
+  const cardHeight = cardWith * 0.9;
+
+  const style =
+    size === "small" ? { width: cardWith, height: cardHeight } : undefined;
 
   return (
     <Link push href={`/city-details/${cityPreview.id}`} asChild>
