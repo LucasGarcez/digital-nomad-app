@@ -32,11 +32,7 @@ export function CityDetailsRelatedCities({ id }: Props) {
         }}
       >
         {cities?.map((city) => (
-          <CityCard
-            key={city.id}
-            cityPreview={city}
-            style={{ width: cardWith, height: cardHeight }}
-          />
+          <CityCard key={city.id} cityPreview={city} type="small" />
         ))}
       </ScrollView>
     </Box>

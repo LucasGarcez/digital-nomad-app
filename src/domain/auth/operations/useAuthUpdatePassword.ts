@@ -4,25 +4,27 @@ import {
   UseAppMutationOptions,
 } from "@/src/infra/operations/useAppMutation";
 import { useRepository } from "@/src/infra/repositories/RepositoryProvider";
+import { AuthUpdatePasswordParams } from "../IAuthRepo";
 
-export function useAuthSendResetPasswordEmail(
-  options?: UseAppMutationOptions<void>
-) {
+export function useAuthUpdatePassword(options?: UseAppMutationOptions<void>) {
   const { auth } = useRepository();
   const feedbackService = useFeedbackService();
 
-  return useAppMutation<void, { email: string }>({
-    mutationFn: ({ email }) => auth.sendResetPasswordEmail(email),
+  return useAppMutation<void, AuthUpdatePasswordParams>({
+    mutationFn: (params) => auth.updatePassword(params),
     onSuccess: () => {
       options?.onSuccess?.();
       feedbackService.send({
         type: "success",
-        message: `verifique sua caixa de e-mail`,
+        message: `senha atualizada com sucesso`,
       });
     },
     onError: (error) => {
       options?.onError?.(error);
-      feedbackService.send({ type: "error", message: "error on sign" });
+      feedbackService.send({
+        type: "error",
+        message: "erro ao atualizar senha",
+      });
     },
   });
 }

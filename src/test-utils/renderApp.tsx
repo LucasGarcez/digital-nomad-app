@@ -22,8 +22,12 @@ import { inMemoryStorage } from "../infra/storage/adapters/InMemoryStorage";
 import { StorageProvider } from "../infra/storage/StorageContext";
 import theme from "../ui/theme/theme";
 
+import UpdatePasswordScreen from "@/app/(protected)/update-password";
+import UpdateProfileScreen from "@/app/(protected)/update-profile";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import clonedeep from "lodash.clonedeep";
 import merge from "lodash.merge";
+import { queryClientOptions } from "./queryClientOptions";
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
@@ -34,6 +38,7 @@ function MockedAuthProvider({ children }: React.PropsWithChildren) {
     email: "lucas@coffstack.com",
     id: "1",
     fullname: "Lucas Garcez",
+    createdAt: "2025-06-23T10:32:55.10671Z",
   };
 
   return (
@@ -59,24 +64,28 @@ export function renderApp(options?: {
     options?.repositories ?? {}
   );
 
+  const client = new QueryClient(queryClientOptions);
+
   const FinalAuthProvider = options?.isAuthenticated
     ? MockedAuthProvider
     : AuthProvider;
 
   function Wrapper({ children }: React.PropsWithChildren) {
     return (
-      <StorageProvider storage={inMemoryStorage}>
-        <FinalAuthProvider>
-          <FeedbackProvider value={ToastFeedback}>
-            <RepositoryProvider value={finalRepository}>
-              <ThemeProvider theme={theme}>
-                {children}
-                <Toast />
-              </ThemeProvider>
-            </RepositoryProvider>
-          </FeedbackProvider>
-        </FinalAuthProvider>
-      </StorageProvider>
+      <QueryClientProvider client={client}>
+        <StorageProvider storage={inMemoryStorage}>
+          <FinalAuthProvider>
+            <FeedbackProvider value={ToastFeedback}>
+              <RepositoryProvider value={finalRepository}>
+                <ThemeProvider theme={theme}>
+                  {children}
+                  <Toast />
+                </ThemeProvider>
+              </RepositoryProvider>
+            </FeedbackProvider>
+          </FinalAuthProvider>
+        </StorageProvider>
+      </QueryClientProvider>
     );
   }
 
@@ -89,6 +98,8 @@ export function renderApp(options?: {
       "(protected)/(tabs)/explore": () => <ExploreScreen />,
       "(protected)/(tabs)/profile": () => <ProfileScreen />,
       "(protected)/city-details/[id]": () => <CityDetails />,
+      "(protected)/update-profile": () => <UpdateProfileScreen />,
+      "(protected)/update-password": () => <UpdatePasswordScreen />,
       "sign-in": () => <SignInScreen />,
       "sign-up": () => <SignUpScreen />,
     },

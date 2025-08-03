@@ -11,7 +11,7 @@ export function useAuthSignUp(options?: UseAppMutationOptions<void>) {
   const feedbackService = useFeedbackService();
 
   return useAppMutation<void, AuthSignUpParams>({
-    mutateFn: (params) => auth.signUp(params),
+    mutationFn: (params) => auth.signUp(params),
     onSuccess: () => {
       options?.onSuccess?.();
       feedbackService.send({
