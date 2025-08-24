@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Digital Nomad",
+    "name": "Nomad",
     "slug": "digital-nomad-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,9 +14,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#1B1B1B"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.coffstack.digitalnomadapp"
     },
     "web": {
       "bundler": "metro",

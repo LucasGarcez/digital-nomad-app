@@ -8,6 +8,8 @@ node_modules/
 dist/
 web-build/
 expo-env.d.ts
+android/
+ios/
 
 # Native
 .kotlin/
@@ -41,3 +43,5 @@ app-example
 .env
 
 coverage/
+
+.cursor/
