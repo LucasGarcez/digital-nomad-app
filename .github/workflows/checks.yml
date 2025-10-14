@@ -1,0 +1,30 @@
+name: Pull Request Checks
+
+on:
+    workflow_dispatch:
+
+    workflow_call:
+
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    checks:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "18"
+
+            - name: Install Packages
+              run: npm install
+
+            - name: Run TypeScript compiler
+              run: npx tsc --noEmit
+
+            - name: Run test
+              run: npm run test
