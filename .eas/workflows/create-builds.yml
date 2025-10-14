@@ -2,7 +2,7 @@ name: Create Production Builds
 
 on:
   push:
-    branches: ["module-11-sandbox"]
+    branches: ["*"]
 
 jobs:
   build_android:
