@@ -7,10 +7,9 @@ on:
 jobs:
   check_code:
     steps:
-      # - uses: eas/checkout@v2
-      # - uses: eas/install_node_modules
-      - name: Install TypeScript
-        run: npm install typescript
+      - uses: eas/checkout@v2
+      - uses: eas/install_node_modules
+
       - name: Run TypeScript compiler
         run: npx tsc --noEmit
       - name: Run Tests
