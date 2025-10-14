@@ -1,0 +1,19 @@
+name: Create Production Builds
+
+on:
+  push:
+    branches: ["module-11-sandbox"]
+
+jobs:
+  build_android:
+    name: Build Android app
+    type: build
+    params:
+      platform: android
+      profile: production
+  build_ios:
+    name: Build iOS app
+    type: build
+    params:
+      platform: ios
+      profile: production
