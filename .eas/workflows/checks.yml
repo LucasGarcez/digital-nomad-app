@@ -1,0 +1,13 @@
+name: Create Production Builds
+
+on:
+  push:
+    branches: ["*"]
+
+jobs:
+  my_job:
+    steps:
+      - name: My first step
+        run: echo "Hello World"
+      - name: Check TypeScript
+        run: npx tsc --noEmit

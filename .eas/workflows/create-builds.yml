@@ -1,8 +1,8 @@
 name: Create Production Builds
 
-on:
-  push:
-    branches: ["module-11-sandbox"]
+# on:
+#   push:
+#     branches: ["module-11-sandbox"]
 
 jobs:
   build_android:
