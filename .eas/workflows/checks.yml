@@ -13,5 +13,5 @@ jobs:
         run: npm install typescript
       - name: Run TypeScript compiler
         run: npx tsc --noEmit
-      # - name: Run Tests
-      #   run: npm run test
+      - name: Run Tests
+        run: npm run test:ci
