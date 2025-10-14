@@ -5,9 +5,9 @@ on:
     branches: ["*"]
 
 jobs:
-  my_job:
+  check_code:
     steps:
-      - name: My first step
-        run: echo "Hello World"
-      - name: Check TypeScript
+      - name: Run TypeScript compiler
         run: npx tsc --noEmit
+      - name: Run Tests
+        run: npm run test
