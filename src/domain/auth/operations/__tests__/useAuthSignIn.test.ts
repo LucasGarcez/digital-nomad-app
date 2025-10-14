@@ -36,6 +36,7 @@ describe("useAuthSignIn()", () => {
       id: "1",
       email: "lucas@coffstack.com",
       fullname: "Lucas Garcez",
+      createdAt: "2025-06-23T10:32:55.10671Z",
     };
     mockSignIn.mockResolvedValueOnce(user);
 
