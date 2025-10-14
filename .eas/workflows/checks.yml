@@ -1,4 +1,4 @@
-name: Create Production Builds
+name: Check Code
 
 on:
   push:
