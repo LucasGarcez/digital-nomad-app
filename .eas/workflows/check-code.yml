@@ -1,0 +1,15 @@
+name: Check Code
+
+on:
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  check_code:
+    name: Check Code jobs
+    steps:
+      - uses: eas/checkout
+      - uses: eas/install_node_modules
+
+      - name: Run TypeScript Compiler
+        run: npx tsc --noEmit
