@@ -10,6 +10,7 @@ import { useAppTheme } from "@/src/ui/theme/useAppTheme";
 import { useDebounce } from "@/src/utils/hooks/useDebounce";
 
 import { Text } from "@/src/ui/components/Text";
+import { errorUtils } from "@/src/utils/errorUtils";
 import { useScrollToTop } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import { ListRenderItemInfo } from "react-native";
@@ -54,7 +55,11 @@ export default function HomeScreen() {
     if (isLoading) {
       Content = <Text>carregando cidades...</Text>;
     } else if (error) {
-      Content = <Text>erro ao carregar cidades. {error.message}</Text>;
+      Content = (
+        <Text>
+          erro ao carregar cidades. {errorUtils.getErrorMessage(error)}
+        </Text>
+      );
     } else {
       Content = <Text>não há cidades no momento</Text>;
     }
