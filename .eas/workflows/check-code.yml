@@ -13,3 +13,6 @@ jobs:
 
       - name: Run TypeScript Compiler
         run: npx tsc --noEmit
+
+      - name: Run Tests
+        run: npm run test:ci
