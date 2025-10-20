@@ -22,7 +22,7 @@ describe("integration: Home", () => {
 
     await waitForElementToBeRemoved(() => screen.getByText("Dubai"));
 
-    expect(screen.getByText("Barcelona")).toBeOnTheScreen();
+    expect(await screen.findByText("Barcelona")).toBeOnTheScreen();
     expect(screen.getByText("Espanha")).toBeOnTheScreen();
   });
 
