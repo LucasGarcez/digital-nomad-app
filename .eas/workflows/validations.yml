@@ -1,11 +1,11 @@
-name: Check Code
+name: Validation
 
 on:
   push:
     branches: ["*"]
 
 jobs:
-  check_code:
+  code-validation:
     steps:
       - uses: eas/checkout
       - uses: eas/install_node_modules
