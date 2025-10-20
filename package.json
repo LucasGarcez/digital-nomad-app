@@ -9,6 +9,7 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "test": "jest --watchAll --verbose",
+    "test:ci": "jest --verbose",
     "test:coverage": "jest --verbose --coverage"
   },
   "dependencies": {
