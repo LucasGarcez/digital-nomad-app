@@ -1,7 +1,7 @@
 module.exports = {
   name: "Nomad",
   slug: "digital-nomad-app",
-  version: "1.0.0",
+  version: "1.0.1",
   orientation: "portrait",
   icon: "./assets/images/icon.png",
   scheme: "digitalnomadapp",
@@ -52,6 +52,13 @@ module.exports = {
     router: {},
     eas: {
       projectId: "03f30d93-abb0-463f-901f-09d172493029",
+    },
+  },
+  submit: {
+    production: {
+      ios: {
+        ascAppId: "6751949092",
+      },
     },
   },
 };
