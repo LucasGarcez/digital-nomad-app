@@ -54,11 +54,4 @@ module.exports = {
       projectId: "03f30d93-abb0-463f-901f-09d172493029",
     },
   },
-  submit: {
-    production: {
-      ios: {
-        ascAppId: "6751949092",
-      },
-    },
-  },
 };
