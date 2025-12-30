@@ -54,4 +54,10 @@ module.exports = {
       projectId: "03f30d93-abb0-463f-901f-09d172493029",
     },
   },
+  updates: {
+    url: "https://u.expo.dev/03f30d93-abb0-463f-901f-09d172493029",
+  },
+  runtimeVersion: {
+    policy: "appVersion",
+  },
 };

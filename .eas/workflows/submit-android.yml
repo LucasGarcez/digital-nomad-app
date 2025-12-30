@@ -1,0 +1,22 @@
+name: Android - Build and Submit
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build_android:
+    name: Build Android app
+    type: build
+    params:
+      platform: android
+      profile: production
+
+  submit_android:
+    name: Submit to Google Play Store
+    needs: [build_android]
+    type: submit
+    params:
+      build_id: ${{ needs.build_android.outputs.build_id }}
+    env:
+      EXPO_DEBUG: "1"

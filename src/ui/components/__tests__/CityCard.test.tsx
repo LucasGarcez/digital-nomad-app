@@ -12,6 +12,7 @@ describe("<CityCard />", () => {
           country: "Brasil",
           coverImage: "fake-url",
           name: "Bangkok",
+          isFavorite: false,
         }}
       />
     );
@@ -26,6 +27,7 @@ describe("<CityCard />", () => {
           country: "Brasil",
           coverImage: "fake-url",
           name: "Rio de Janeiro",
+          isFavorite: false,
         }}
       />
     );
