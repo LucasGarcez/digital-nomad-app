@@ -1,0 +1,34 @@
+appId: com.coffstack.digitalnomadapp
+---
+- launchApp
+
+# Sign In
+- tapOn:
+    id: "email-input"
+- inputText: "contato@coffstack.com"
+- tapOn:
+    id: "password-input"
+- inputText: "a123456b"
+- hideKeyboard
+- tapOn:
+    text: "Entrar"
+
+# Sign In Success
+- assertVisible: ".*signed in.*"
+
+# Sign In Out
+- tapOn:
+    text: ".*Perfil.*"
+# - tapOn:
+#     text: ".*Sair.*"
+
+- repeat:
+    while:
+      notVisible: ".*Bem-vindo.*"
+    commands:
+      - tapOn:
+          id: "sign-out-button"
+# Sign Out Success
+- assertVisible: ".*Bem-vindo.*"
+
+- stopApp: com.coffstack.digitalnomadapp
