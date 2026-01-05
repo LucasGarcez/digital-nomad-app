@@ -11,6 +11,14 @@
         "simulator": true
       }
     },
+    "maestro": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "withoutCredentials": true,
+      "ios": {
+        "simulator": true
+      }
+    },
     "ios-simulator": {
       "developmentClient": false,
       "distribution": "internal",
