@@ -1,0 +1,25 @@
+appId: com.coffstack.digitalnomadapp
+---
+- launchApp:
+    clearState: true
+
+- runFlow: sign-in.yml
+
+- tapOn:
+    text: .*Perfil.*
+- tapOn:
+    text: .*Editar perfil.*
+
+- tapOn:
+    id: fullname-input
+
+- eraseText: 100
+- inputText: "Maestro Name"
+
+- hideKeyboard
+
+- tapOn:
+    id: submit-button
+
+- assertVisible: ".*perfil atualizado.*"
+- assertVisible: ".*Maestro Name*"
