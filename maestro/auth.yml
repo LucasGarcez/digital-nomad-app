@@ -16,3 +16,16 @@ appId: com.coffstack.digitalnomadapp
     text: "Entrar"
 
 - assertVisible: ".*signed in.*"
+
+# Sign out
+- tapOn:
+    text: .*Perfil.*
+
+- repeat:
+    while:
+      notVisible: ".*Bem-vindo.*"
+    commands:
+      - tapOn:
+          id: "sign-out-button"
+
+- assertVisible: ".*Bem-vindo.*"
