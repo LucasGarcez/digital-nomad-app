@@ -1,0 +1,16 @@
+appId: com.coffstack.digitalnomadapp
+---
+- tapOn:
+    id: "email-input"
+- inputText: "contato@coffstack.com"
+
+- tapOn:
+    id: "password-input"
+- inputText: "a123456b"
+
+- hideKeyboard
+
+- tapOn:
+    text: "Entrar"
+
+- assertVisible: ".*signed in.*"

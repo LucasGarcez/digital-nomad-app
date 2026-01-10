@@ -15,6 +15,14 @@
       "distribution": "internal",
       "channel": "preview"
     },
+    "maestro": {
+      "distribution": "internal",
+      "channel": "preview",
+      "withoutCredentials": true,
+      "ios": {
+        "simulator": true
+      }
+    },
     "production": {
       "autoIncrement": true,
       "channel": "production"
