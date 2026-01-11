@@ -1,0 +1,19 @@
+name: e2e-test-ios
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs at midnight GMT every day
+
+jobs:
+  build_ios_for_e2e:
+    type: build
+    params:
+      platform: ios
+      profile: maestro # your eas build profile for E2E test
+
+  maestro_test:
+    needs: [build_ios_for_e2e]
+    type: maestro
+    params:
+      build_id: ${{ needs.build_ios_for_e2e.outputs.build_id }}
+      flow_path: [".maestro/auth.yml", ".maestro/edit-profile.yml"]
