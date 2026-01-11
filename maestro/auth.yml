@@ -13,17 +13,12 @@ appId: com.coffstack.digitalnomadapp
     while:
       notVisible: ".*Bem-vindo.*"
     commands:
-      - runFlow:
-          when:
-            visible: "sign-out-button"
-          commands:
-            - tapOn:
-                id: "sign-out-button"
-      - runFlow:
-          when:
-            notVisible: "sign-out-button"
-          commands:
-            - tapOn:
-                text: "Sair"
+      - scrollUntilVisible:
+          element:
+            id: "sign-out-button"
+          direction: DOWN
+
+      - tapOn:
+          id: "sign-out-button"
 
 - assertVisible: ".*Bem-vindo.*"
