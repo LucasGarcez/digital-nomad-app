@@ -13,6 +13,11 @@ appId: com.coffstack.digitalnomadapp
     while:
       notVisible: ".*Bem-vindo.*"
     commands:
+      - scrollUntilVisible:
+          element:
+            id: "sign-out-button" # or any other selector
+          direction: DOWN # DOWN|UP|LEFT|RIGHT (optional, default: DOWN)
+
       - tapOn:
           id: "sign-out-button"
 

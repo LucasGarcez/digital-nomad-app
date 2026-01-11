@@ -1,0 +1,12 @@
+name: e2e-test-android-fast
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs at midnight GMT every day
+
+jobs:
+  maestro_test:
+    type: maestro
+    params:
+      build_id: "b92b7675-d87a-4adc-92cf-74822d3cb74f"
+      flow_path: ["maestro/auth.yml", "maestro/edit-profile.yml"]
