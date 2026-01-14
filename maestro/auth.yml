@@ -1,0 +1,24 @@
+appId: com.coffstack.digitalnomadapp
+---
+- launchApp:
+    clearState: true
+
+- runFlow: sign-in.yml
+
+# Sign out
+- tapOn:
+    text: .*Perfil.*
+
+- repeat:
+    while:
+      notVisible: ".*Bem-vindo.*"
+    commands:
+      - scrollUntilVisible:
+          element:
+            id: "sign-out-button" # or any other selector
+          direction: DOWN # DOWN|UP|LEFT|RIGHT (optional, default: DOWN)
+
+      - tapOn:
+          id: "sign-out-button"
+
+- assertVisible: ".*Bem-vindo.*"
