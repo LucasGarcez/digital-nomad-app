@@ -1,8 +1,11 @@
 name: e2e-test-android-fast
 
+# on:
+#   schedule:
+#     - cron: "0 0 * * *" # Runs at midnight GMT every day
 on:
-  schedule:
-    - cron: "0 0 * * *" # Runs at midnight GMT every day
+  push:
+    branches: ["main-end-to-end"]
 
 jobs:
   maestro_test:
